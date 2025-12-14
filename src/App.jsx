@@ -1,18 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import Login from './pages/Auth/Login';
+import AppLayout from './layouts/AppLayout';
+import Home from './pages/Home/Home.jsx';
 
 function App() {
-  return ( 
-      <div className="w-[1280px] min-h-screen bg-blue-500 text-foreground mx-auto">
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+  return (
+    <Routes>
+      {/* Route cha sử dụng Layout */}
+      <Route path="/" element={<AppLayout />}>
         
-      </Routes>
-
-    </div>
+        {/* Route con: Trang chủ */}
+        <Route index element={<Home />} />
+        
+        {/* Các route khác sẽ thêm sau: /login, /movie/:id */}
+      </Route>
+    </Routes>
   );
 }
 

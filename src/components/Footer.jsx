@@ -1,8 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 py-6 mt-10 text-center">
-      <p className="font-bold">WEB APP DEV - 12/2025</p>
-      <p className="text-sm mt-1">Thực hiện bởi: 23120289 - Nguyễn Nhật Lân</p>
+    <footer className="bg-[#F0DBDA] text-[#774743] px-4 py-2 text-center border-2 border-[#AA8F96] rounded-md">
+      <p className="font-bold">23120289 - Nguyễn Nhật Lân</p>
     </footer>
   );
 };
