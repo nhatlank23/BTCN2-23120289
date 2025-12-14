@@ -31,10 +31,10 @@ const Home = () => {
       </section>
 
       {/* Most Popular Section */}
-      <MovieSlider title="Most Popular" movies={popularMovies} />
+      <MovieSlider title="Most Popular" movies={popularMovies.slice(0, 3)} />
 
       {/* Top Rating Section */}
-      <MovieSlider title="Top Rating" movies={topRatedMovies} />
+      <MovieSlider title="Top Rating" movies={topRatedMovies.slice(0, 3)} />
     </div>
   );
 };
