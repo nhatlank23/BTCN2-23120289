@@ -2,9 +2,9 @@ import { Card } from "./ui/card";
 
 const MovieCard = ({ movie, size = "normal" }) => {
   return (
-    <Card className="flex-shrink-0 cursor-pointer group overflow-hidden border-0">
+    <Card className="flex-shrink-0 cursor-pointer group overflow-hidden border-0 p-0">
       <div className={`relative overflow-hidden ${
-        size === "large" ? "w-[300px] h-[450px]" : "w-[200px] h-[300px]"
+        size === "large" ? "w-[300px] h-[450px]" : "w-[360px] h-[300px]"
       }`}>
         <img 
           src={movie.image} 

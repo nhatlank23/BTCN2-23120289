@@ -6,7 +6,7 @@ const MovieSlider = ({ title, movies, size = "normal" }) => {
     <div className="mb-8">
       <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{title}</h2>
       
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex justify-between items-center">
         {/* Left Arrow - Static */}
         <button className="text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400 transition-colors">
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
