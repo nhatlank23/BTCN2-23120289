@@ -25,7 +25,7 @@ const Nav = () => {
                     placeholder="Tìm kiếm phim..."
                     className="bg-white border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
-                <button className="text-black-400 px-4 py-2 rounded-md hover:bg-blue-700 font-medium border-2 border-black-500">
+                <button className="text-gray-700 px-4 py-2 rounded-md hover:bg-blue-700 font-medium border-2 border-gray-500">
                     Search
                 </button>
             </div>
