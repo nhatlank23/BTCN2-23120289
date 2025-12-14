@@ -392,3 +392,10 @@ export const topRatedMovies = [
     rating: 8.6,
   },
 ];
+
+// Helper function: Lấy top N phim có rating cao nhất
+export const getTopRatedMovies = (movies, limit = 5) => {
+  return [...movies]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, limit);
+};
