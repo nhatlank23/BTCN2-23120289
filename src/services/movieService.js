@@ -49,3 +49,10 @@ export const getTopMovies = (movies, limit = 5) => {
     .sort((a, b) => (b.rate || 0) - (a.rate || 0)) 
     .slice(0, limit);
 };
+
+// 4. Tìm kiếm phim theo tên
+export const searchMovies = async (query) => {
+  if (!query) return [];
+  const response = await fetchFromAPI(`/api/movies/search?title=${encodeURIComponent(query)}`);
+  return response?.data || [];
+};
