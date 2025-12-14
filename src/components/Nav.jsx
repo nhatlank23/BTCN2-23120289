@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
     return (
-        <div className="bg-[#D3E1FC] dark:bg-[#1e3a5f] border-b px-4 py-1 flex gap-4 items-center justify-between border-2 border-[#C3CFE8] dark:border-[#2d4a6b] rounded-md transition-colors">
+        <div className="bg-[#D3E1FC] dark:bg-[#1e3a5f] border-b px-4 py-0.5 flex gap-4 items-center justify-between border-2 border-[#C3CFE8] dark:border-[#2d4a6b] rounded-md transition-colors">
             {/* Bên trái: Nút Home */}
             <div className="flex items-center gap-4">
-                <Link to="/" className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                <Link to="/" className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -23,9 +23,9 @@ const Nav = () => {
                 <input
                     type="text"
                     placeholder="Tìm kiếm phim..."
-                    className="bg-white dark:bg-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 dark:placeholder-gray-400"
+                    className="bg-white dark:bg-gray-800 dark:text-white border border-gray-300 dark:border-gray-600 px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 dark:placeholder-gray-400"
                 />
-                <button className="text-gray-700 dark:text-gray-200 px-4 py-2 rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 font-medium border-2 border-gray-500 dark:border-gray-600 transition-colors">
+                <button className="text-gray-700 dark:text-gray-200 px-4 py-1 rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 font-medium border-2 border-gray-500 dark:border-gray-600 transition-colors">
                     Search
                 </button>
             </div>
