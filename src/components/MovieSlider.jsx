@@ -38,7 +38,7 @@ const MovieSlider = ({ title, movies, size = "normal" }) => {
         </button>
 
         {/* Movies with slide animation */}
-        <div className="flex justify-center items-center gap-4 overflow-hidden">
+        <div className="flex justify-center items-center gap-4 overflow-visible">
           <div 
             key={currentPage}
             className={`flex gap-4 animate-in duration-300 ${
