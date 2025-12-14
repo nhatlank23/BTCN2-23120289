@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 const AppLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-blue-500 text-gray-900 max-w-[1280px] mx-auto">
+    <div className="min-h-screen flex flex-col  text-gray-900 max-w-[1280px] mx-auto">
       {/* 1. Header luôn nằm trên cùng */}
       <Header />
       {/* 2. Main Content: Phần thay đổi giữa các trang */}
