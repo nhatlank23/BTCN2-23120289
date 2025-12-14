@@ -1,401 +1,278 @@
-// Fake data cho movies
-export const featuredMovies = [
-  {
-    id: 1,
-    title: "Sherlock Jr.",
-    image: "https://image.tmdb.org/t/p/w500/hVxTDPJOgOdKr6TFu8B0A6HLPMP.jpg",
-    year: 1924,
-    rating: 8.2,
-  },
-  {
-    id: 2,
-    title: "The Godfather",
-    image: "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-    year: 1972,
-    rating: 9.2,
-  },
-  {
-    id: 3,
-    title: "The Dark Knight",
-    image: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-    year: 2008,
-    rating: 9.0,
-  },
-  {
-    id: 14,
-    title: "Inception",
-    image: "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-    year: 2010,
-    rating: 8.8,
-  },
-  {
-    id: 15,
-    title: "Interstellar",
-    image: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
-    year: 2014,
-    rating: 8.6,
-  },
-  {
-    id: 16,
-    title: "The Matrix",
-    image: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-    year: 1999,
-    rating: 8.7,
-  },
-  {
-    id: 17,
-    title: "Parasite",
-    image: "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
-    year: 2019,
-    rating: 8.6,
-  },
-  {
-    id: 18,
-    title: "Avengers: Endgame",
-    image: "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
-    year: 2019,
-    rating: 8.4,
-  },
-  {
-    id: 19,
-    title: "Joker",
-    image: "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
-    year: 2019,
-    rating: 8.5,
-  },
-  {
-    id: 20,
-    title: "Forrest Gump",
-    image: "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
-    year: 1994,
-    rating: 8.8,
-  },
-  {
-    id: 21,
-    title: "The Lord of the Rings: The Return of the King",
-    image: "https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
-    year: 2003,
-    rating: 8.9,
-  },
-  {
-    id: 22,
-    title: "Fight Club",
-    image: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
-    year: 1999,
-    rating: 8.8,
-  },
-  {
-    id: 23,
-    title: "The Lion King",
-    image: "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd1v.jpg",
-    year: 1994,
-    rating: 8.5,
-  },
-  {
-    id: 24,
-    title: "Gladiator",
-    image: "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
-    year: 2000,
-    rating: 8.5,
-  },
-  {
-    id: 25,
-    title: "The Prestige",
-    image: "https://image.tmdb.org/t/p/w500/tRNlZbgNCNOpLpbPEz5L8G8A0JN.jpg",
-    year: 2006,
-    rating: 8.5,
-  },
-];
 
 export const popularMovies = [
   {
-    id: 4,
-    title: "Spider-Man: Across the Spider-Verse",
-    image: "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
-    year: 2023,
-    rating: 8.7,
+    "id": "tt4154796",
+    "title": "Avengers: Endgame",
+    "year": 2019,
+    "image": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+    "rate": 8.4,
+    "box_office_revenue": "$2,799,439,100",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ]
   },
   {
-    id: 5,
-    title: "Little Mermaid",
-    image: "https://image.tmdb.org/t/p/w500/ym1dxyOk4jFcSl4Q2zmRrA5BEEN.jpg",
-    year: 2023,
-    rating: 7.2,
+    "id": "tt4154756",
+    "title": "Avengers: Infinity War",
+    "year": 2018,
+    "image": "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+    "rate": 8.4,
+    "box_office_revenue": "$2,052,415,039",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ]
   },
   {
-    id: 6,
-    title: "Transformers: Rise of the Beasts",
-    image: "https://image.tmdb.org/t/p/w500/2vFuG6bWGyQUzYS9d69E5l85nIz.jpg",
-    year: 2023,
-    rating: 7.5,
+    "id": "tt10872600",
+    "title": "Spider-Man: No Way Home",
+    "year": 2021,
+    "image": "https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
+    "rate": 8.2,
+    "box_office_revenue": "$1,921,847,111",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ]
   },
   {
-    id: 7,
-    title: "Guardians of the Galaxy Vol. 3",
-    image: "https://image.tmdb.org/t/p/w500/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
-    year: 2023,
-    rating: 8.1,
+    "id": "tt1745960",
+    "title": "Top Gun: Maverick",
+    "year": 2022,
+    "image": "https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUN's elite graduates on a mission that demands the ultimate sacrifice from those chosen to fly it.",
+    "rate": 8.3,
+    "box_office_revenue": "$1,495,696,292",
+    "genres": [
+      "Action",
+      "Drama"
+    ]
   },
   {
-    id: 8,
-    title: "Fast X",
-    image: "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
-    year: 2023,
-    rating: 7.3,
+    "id": "tt1201607",
+    "title": "Harry Potter and the Deathly Hallows: Part 2",
+    "year": 2011,
+    "image": "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "Harry, Ron, and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts.",
+    "rate": 8.1,
+    "box_office_revenue": "$1,342,359,942",
+    "genres": [
+      "Adventure",
+      "Family",
+      "Fantasy"
+    ]
   },
   {
-    id: 26,
-    title: "Oppenheimer",
-    image: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
-    year: 2023,
-    rating: 8.4,
+    "id": "tt0167260",
+    "title": "The Lord of the Rings: The Return of the King",
+    "year": 2003,
+    "image": "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+    "rate": 9,
+    "box_office_revenue": "$1,147,633,833",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ]
   },
   {
-    id: 27,
-    title: "Barbie",
-    image: "https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
-    year: 2023,
-    rating: 7.2,
+    "id": "tt0107290",
+    "title": "Jurassic Park",
+    "year": 1993,
+    "image": "https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+    "rate": 8.2,
+    "box_office_revenue": "$1,109,802,321",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ]
   },
   {
-    id: 28,
-    title: "Mission: Impossible - Dead Reckoning Part One",
-    image: "https://image.tmdb.org/t/p/w500/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
-    year: 2023,
-    rating: 7.7,
+    "id": "tt7286456",
+    "title": "Joker",
+    "year": 2019,
+    "image": "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6762_AL_.jpg",
+    "short_description": "The rise of Arthur Fleck, from aspiring stand-up comedian and pariah to Gotham's clown prince and leader of the revolution.",
+    "rate": 8.4,
+    "box_office_revenue": "$1,074,458,282",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ]
   },
   {
-    id: 29,
-    title: "The Flash",
-    image: "https://image.tmdb.org/t/p/w500/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg",
-    year: 2023,
-    rating: 7.0,
+    "id": "tt0435761",
+    "title": "Toy Story 3",
+    "year": 2010,
+    "image": "https://m.media-amazon.com/images/M/MV5BMTgxOTY4Mjc0MF5BMl5BanBnXkFtZTcwNTA4MDQyMw@@._V1_Ratio0.7117_AL_.jpg",
+    "short_description": "The toys are mistakenly delivered to a day-care center instead of the attic right before Andy leaves for college, and it's up to Woody to convince the other toys that they weren't abandoned and to return home.",
+    "rate": 8.3,
+    "box_office_revenue": "$1,067,316,101",
+    "genres": [
+      "Animation",
+      "Adventure",
+      "Comedy"
+    ]
   },
   {
-    id: 30,
-    title: "Indiana Jones and the Dial of Destiny",
-    image: "https://image.tmdb.org/t/p/w500/Af4bXE63pVsb2FtbW8uYIyPBadD.jpg",
-    year: 2023,
-    rating: 6.9,
-  },
-  {
-    id: 31,
-    title: "Elemental",
-    image: "https://image.tmdb.org/t/p/w500/4Y1WNkd88JXmGfhtWR7dmDAo1T2.jpg",
-    year: 2023,
-    rating: 7.7,
-  },
-  {
-    id: 32,
-    title: "The Super Mario Bros. Movie",
-    image: "https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg",
-    year: 2023,
-    rating: 7.4,
-  },
-  {
-    id: 33,
-    title: "Ant-Man and the Wasp: Quantumania",
-    image: "https://image.tmdb.org/t/p/w500/ngl2FKBlU4fhbdsrtdom9LVLBXw.jpg",
-    year: 2023,
-    rating: 6.5,
-  },
-  {
-    id: 34,
-    title: "John Wick: Chapter 4",
-    image: "https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
-    year: 2023,
-    rating: 7.9,
-  },
-  {
-    id: 35,
-    title: "Avatar: The Way of Water",
-    image: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
-    year: 2022,
-    rating: 7.7,
-  },
-  {
-    id: 36,
-    title: "Top Gun: Maverick",
-    image: "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
-    year: 2022,
-    rating: 8.3,
-  },
-  {
-    id: 37,
-    title: "Black Panther: Wakanda Forever",
-    image: "https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg",
-    year: 2022,
-    rating: 7.3,
-  },
-  {
-    id: 38,
-    title: "Doctor Strange in the Multiverse of Madness",
-    image: "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
-    year: 2022,
-    rating: 7.0,
-  },
-  {
-    id: 39,
-    title: "Thor: Love and Thunder",
-    image: "https://image.tmdb.org/t/p/w500/pIkRyD18kl4FhoCNQuWxWu5cBLM.jpg",
-    year: 2022,
-    rating: 6.8,
-  },
-  {
-    id: 40,
-    title: "Minions: The Rise of Gru",
-    image: "https://image.tmdb.org/t/p/w500/wKiOkZTN9lUUUNZLmtnwubZYONg.jpg",
-    year: 2022,
-    rating: 7.4,
-  },
+    "id": "tt0468569",
+    "title": "The Dark Knight",
+    "year": 2008,
+    "image": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "rate": 9,
+    "box_office_revenue": "$1,006,234,167",
+    "genres": [
+      "Action",
+      "Crime",
+      "Drama"
+    ]
+  }
 ];
 
 export const topRatedMovies = [
   {
-    id: 9,
-    title: "The Shawshank Redemption",
-    image: "https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
-    year: 1994,
-    rating: 9.3,
+    "id": "tt0111161",
+    "rank": 1,
+    "title": "The Shawshank Redemption",
+    "image": "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+    "rate": 9.2,
+    "genres": [
+      "Drama"
+    ]
   },
   {
-    id: 10,
-    title: "The Godfather",
-    image: "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
-    year: 1972,
-    rating: 9.2,
+    "id": "tt0068646",
+    "rank": 2,
+    "title": "The Godfather",
+    "image": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_Ratio0.7015_AL_.jpg",
+    "short_description": "Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger.",
+    "rate": 9.2,
+    "genres": [
+      "Crime",
+      "Drama"
+    ]
   },
   {
-    id: 11,
-    title: "The Dark Knight",
-    image: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-    year: 2008,
-    rating: 9.0,
+    "id": "tt0468569",
+    "rank": 3,
+    "title": "The Dark Knight",
+    "image": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "rate": 9,
+    "genres": [
+      "Action",
+      "Crime",
+      "Drama"
+    ]
   },
   {
-    id: 12,
-    title: "Inception",
-    image: "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
-    year: 2010,
-    rating: 8.8,
+    "id": "tt0071562",
+    "rank": 4,
+    "title": "The Godfather Part II",
+    "image": "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_Ratio0.7015_AL_.jpg",
+    "short_description": "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
+    "rate": 9,
+    "genres": [
+      "Crime",
+      "Drama"
+    ]
   },
   {
-    id: 13,
-    title: "Pulp Fiction",
-    image: "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
-    year: 1994,
-    rating: 8.9,
+    "id": "tt0050083",
+    "rank": 5,
+    "title": "12 Angry Men",
+    "image": "https://m.media-amazon.com/images/M/MV5BMWU4N2FjNzYtNTVkNC00NzQ0LTg0MjAtYTJlMjFhNGUxZDFmXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
+    "rate": 9,
+    "genres": [
+      "Crime",
+      "Drama"
+    ]
   },
   {
-    id: 41,
-    title: "Schindler's List",
-    image: "https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
-    year: 1993,
-    rating: 8.9,
+    "id": "tt0108052",
+    "rank": 6,
+    "title": "Schindler's List",
+    "image": "https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.",
+    "rate": 8.9,
+    "genres": [
+      "Biography",
+      "Drama",
+      "History"
+    ]
   },
   {
-    id: 42,
-    title: "12 Angry Men",
-    image: "https://image.tmdb.org/t/p/w500/ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg",
-    year: 1957,
-    rating: 8.9,
+    "id": "tt0167260",
+    "rank": 7,
+    "title": "The Lord of the Rings: The Return of the King",
+    "image": "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+    "rate": 8.9,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ]
   },
   {
-    id: 43,
-    title: "The Lord of the Rings: The Fellowship of the Ring",
-    image: "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
-    year: 2001,
-    rating: 8.8,
+    "id": "tt0110912",
+    "rank": 8,
+    "title": "Pulp Fiction",
+    "image": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "rate": 8.8,
+    "genres": [
+      "Crime",
+      "Drama"
+    ]
   },
   {
-    id: 44,
-    title: "The Good, the Bad and the Ugly",
-    image: "https://image.tmdb.org/t/p/w500/bX2xnavhMYjWDoZp1VM6VnU1xwe.jpg",
-    year: 1966,
-    rating: 8.8,
+    "id": "tt0120737",
+    "rank": 9,
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "image": "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+    "rate": 8.8,
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama",
+      "Fantasy"
+    ]
   },
   {
-    id: 45,
-    title: "Forrest Gump",
-    image: "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
-    year: 1994,
-    rating: 8.8,
-  },
-  {
-    id: 46,
-    title: "Fight Club",
-    image: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
-    year: 1999,
-    rating: 8.8,
-  },
-  {
-    id: 47,
-    title: "The Matrix",
-    image: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-    year: 1999,
-    rating: 8.7,
-  },
-  {
-    id: 48,
-    title: "Goodfellas",
-    image: "https://image.tmdb.org/t/p/w500/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg",
-    year: 1990,
-    rating: 8.7,
-  },
-  {
-    id: 49,
-    title: "Star Wars: Episode V - The Empire Strikes Back",
-    image: "https://image.tmdb.org/t/p/w500/nNAeTmF4CtdSgMDplXTDPOpYzsX.jpg",
-    year: 1980,
-    rating: 8.7,
-  },
-  {
-    id: 50,
-    title: "One Flew Over the Cuckoo's Nest",
-    image: "https://image.tmdb.org/t/p/w500/6d5kSvZLFdTJ7CXIYe5GSVPG4oH.jpg",
-    year: 1975,
-    rating: 8.7,
-  },
-  {
-    id: 51,
-    title: "Interstellar",
-    image: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
-    year: 2014,
-    rating: 8.6,
-  },
-  {
-    id: 52,
-    title: "City of God",
-    image: "https://image.tmdb.org/t/p/w500/k7eYdIizvVYW9gtWZmGFcvXVNSC.jpg",
-    year: 2002,
-    rating: 8.6,
-  },
-  {
-    id: 53,
-    title: "Spirited Away",
-    image: "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
-    year: 2001,
-    rating: 8.6,
-  },
-  {
-    id: 54,
-    title: "Saving Private Ryan",
-    image: "https://image.tmdb.org/t/p/w500/uqx37VF5ivR1IdmueaoWeEReRbO.jpg",
-    year: 1998,
-    rating: 8.6,
-  },
-  {
-    id: 55,
-    title: "The Green Mile",
-    image: "https://image.tmdb.org/t/p/w500/velWPhVMQeQKcxggNEU8YmIo52R.jpg",
-    year: 1999,
-    rating: 8.6,
-  },
+    "id": "tt0060196",
+    "rank": 10,
+    "title": "The Good, the Bad and the Ugly",
+    "image": "https://m.media-amazon.com/images/M/MV5BNjJlYmNkZGItM2NhYy00MjlmLTk5NmQtNjg1NmM2ODU4OTMwXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_Ratio0.6716_AL_.jpg",
+    "short_description": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
+    "rate": 8.8,
+    "genres": [
+      "Adventure",
+      "Western"
+    ]
+  }
 ];
 
 // Helper function: Lấy top N phim có rating cao nhất
-export const getTopRatedMovies = (movies, limit = 5) => {
+export const getTopMovies = (movies, limit = 5) => {
   return [...movies]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 };
+
+
