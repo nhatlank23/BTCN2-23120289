@@ -56,3 +56,19 @@ export const searchMovies = async (query) => {
   const response = await fetchFromAPI(`/api/movies/search?title=${encodeURIComponent(query)}`);
   return response?.data || [];
 };
+
+// 5. Tìm người (Diễn viên/Đạo diễn) theo tên
+export const searchPeople = async (query) => {
+  if (!query) return [];
+  // Limit 5 để lấy những người liên quan nhất
+  const response = await fetchFromAPI(`/api/persons?q=${encodeURIComponent(query)}&limit=5`);
+  console.log('People search response:', response);
+  return response?.data || [];
+};
+
+// 6. Lấy chi tiết người (để lấy danh sách phim của họ)
+export const getPersonDetail = async (personId) => {
+  const response = await fetchFromAPI(`/api/persons/${personId}`);
+  console.log(`Person ${personId} detail response:`, response.known_for);
+  return response?.known_for ? { movies: response.known_for } : null;
+};
