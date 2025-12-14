@@ -37,3 +37,15 @@ export const getMostPopularMovies = async () => {
   return response?.data || [];
 };
 
+// 2. Lấy danh sách phim rating cao 
+export const getTopRatedMovies = async () => {
+  const response = await fetchFromAPI("/api/movies/top-rated");
+  return response?.data || [];
+}
+
+// 3. Helper: Lấy top 5 phim có danh thu cao nhất (tạm dùng rating)
+export const getTopMovies = (movies, limit = 5) => {
+  return [...movies]
+    .sort((a, b) => (b.rate || 0) - (a.rate || 0)) 
+    .slice(0, limit);
+};
