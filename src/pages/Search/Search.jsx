@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import MovieCard from '../../components/MovieCard';
+import SearchCard from '../../components/SearchCard';
 import { searchMovies } from '../../services/movieService';
 
 const Search = () => {
@@ -62,11 +62,9 @@ const Search = () => {
           <p className="text-gray-600 dark:text-gray-400">
             Found {movies.length} movie{movies.length !== 1 ? 's' : ''}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {movies.map((movie) => (
-              <div key={movie.id} className="flex justify-center">
-                <MovieCard movie={movie} size="normal" />
-              </div>
+              <SearchCard key={movie.id} movie={movie} />
             ))}
           </div>
         </>
