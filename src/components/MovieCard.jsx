@@ -2,7 +2,7 @@ import { Card } from "./ui/card";
 
 const MovieCard = ({ movie, size = "normal" }) => {
   return (
-    <div className="flex-shrink-0 cursor-pointer group transition-transform duration-300 hover:scale-110 hover:z-50 relative">
+    <div className="flex-shrink-0 cursor-pointer group transition-transform duration-300 hover:scale-120 hover:z-50 relative">
       <Card className="overflow-hidden border-0 p-0">
         <div className={`relative overflow-hidden ${size === "large" ? "w-[300px] h-[450px]" : "w-[360px] h-[300px]"
           }`}>
