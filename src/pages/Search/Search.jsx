@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchCard from '../../components/SearchCard';
-import { searchMovies } from '../../services/movieService';
+import { searchMovies, searchPeople, getPersonDetail } from '../../services/movieService';
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -18,8 +18,30 @@ const Search = () => {
 
       try {
         setLoading(true);
-        const results = await searchMovies(query);
-        setMovies(results);
+        
+        // 1. Tìm phim theo tên
+        const movieResults = await searchMovies(query);
+        
+        // 2. Tìm người (diễn viên/đạo diễn) theo tên
+        const peopleResults = await searchPeople(query);
+        
+        // 3. Lấy phim từ các người tìm được
+        const moviesFromPeople = [];
+        for (const person of peopleResults) {
+          const personMovies = await getPersonDetail(person.id);
+          // getPersonDetail đã trả về known_for array (là danh sách movies)
+          if (personMovies && personMovies.length > 0) {
+            moviesFromPeople.push(...personMovies);
+          }
+        }
+        
+        // 4. Merge và loại trùng (dựa vào id)
+        const allMovies = [...movieResults, ...moviesFromPeople];
+        const uniqueMovies = Array.from(
+          new Map(allMovies.map(movie => [movie.id, movie])).values()
+        );
+        
+        setMovies(uniqueMovies);
       } catch (error) {
         console.error('Error searching movies:', error);
         setMovies([]);
@@ -33,16 +55,7 @@ const Search = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Search Results
-        </h1>
-        {query && (
-          <p className="text-gray-600 dark:text-gray-400">
-            Searching for: <span className="font-semibold">"{query}"</span>
-          </p>
-        )}
-      </div>
+
 
       {/* Hiển thị kết quả */}
       {loading ? (
@@ -59,9 +72,6 @@ const Search = () => {
         </div>
       ) : (
         <>
-          <p className="text-gray-600 dark:text-gray-400">
-            Found {movies.length} movie{movies.length !== 1 ? 's' : ''}
-          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {movies.map((movie) => (
               <SearchCard key={movie.id} movie={movie} />

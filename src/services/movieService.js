@@ -69,6 +69,6 @@ export const searchPeople = async (query) => {
 // 6. Lấy chi tiết người (để lấy danh sách phim của họ)
 export const getPersonDetail = async (personId) => {
   const response = await fetchFromAPI(`/api/persons/${personId}`);
-  console.log(`Person ${personId} detail response:`, response.known_for);
-  return response?.known_for ? { movies: response.known_for } : null;
+  console.log(`Person detail for ID ${personId}:`, response.known_for);
+  return response?.known_for || [];
 };
