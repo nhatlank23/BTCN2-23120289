@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieDetail } from '../../services/movieService';
 import { Link } from 'react-router-dom';
+import ReviewItem from '../../components/ReviewItem';
 
 const MovieDetail = () => {
     const { id } = useParams();
@@ -185,6 +186,20 @@ const MovieDetail = () => {
                     )}
                 </div>
             </div>
+
+            {/* Reviews Section */}
+            {movie.reviews && movie.reviews.length > 0 && (
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        Reviews ({movie.reviews.length})
+                    </h2>
+                    <div className="space-y-4">
+                        {movie.reviews.map((review) => (
+                            <ReviewItem key={review.id} review={review} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
