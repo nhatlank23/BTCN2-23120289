@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getMovieDetail } from '../../services/movieService';
 import { Link } from 'react-router-dom';
 import ReviewItem from '../../components/ReviewItem';
+import { getFavourites, addToFavourite, removeFromFavourite } from '../../services/favouriteService';
 
 const MovieDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showFullPlot, setShowFullPlot] = useState(false);
@@ -13,8 +15,12 @@ const MovieDetail = () => {
     const [currentReviewPage, setCurrentReviewPage] = useState(1);
     const [showTooltip, setShowTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+    const [isFavourite, setIsFavourite] = useState(false);
+    const [favouriteLoading, setFavouriteLoading] = useState(false);
+    const [message, setMessage] = useState('');
     const actorsPerPage = 3;
     const reviewsPerPage = 4;
+    const isLoggedIn = !!localStorage.getItem('token');
 
     const handleMouseMove = (e) => {
         setTooltipPosition({
@@ -39,6 +45,60 @@ const MovieDetail = () => {
         fetchMovieDetail();
     }, [id]);
 
+    // Check if movie is in favourites
+    useEffect(() => {
+        const checkIfFavourite = async () => {
+            if (!isLoggedIn) return;
+            
+            const result = await getFavourites();
+            if (result.success) {
+                const inFavourites = result.data.some(fav => String(fav.id) === String(id));
+                setIsFavourite(inFavourites);
+            }
+        };
+
+        if (movie) {
+            checkIfFavourite();
+        }
+    }, [id, isLoggedIn, movie]);
+
+    const handleToggleFavourite = async () => {
+        if (!isLoggedIn) {
+            navigate('/login');
+            return;
+        }
+
+        setFavouriteLoading(true);
+        setMessage('');
+
+        try {
+            if (isFavourite) {
+                const result = await removeFromFavourite(id);
+                if (result.success) {
+                    setIsFavourite(false);
+                    setMessage('Removed from favourites');
+                } else {
+                    setMessage(result.error || 'Failed to remove');
+                }
+            } else {
+                const result = await addToFavourite(id);
+                if (result.success) {
+                    setIsFavourite(true);
+                    setMessage('Added to favourites');
+                } else {
+                    setMessage(result.error || 'Failed to add');
+                }
+            }
+            setTimeout(() => setMessage(''), 3000);
+        } catch (error) {
+            console.error('Error toggling favourite:', error);
+            setMessage('An error occurred');
+            setTimeout(() => setMessage(''), 3000);
+        } finally {
+            setFavouriteLoading(false);
+        }
+    };
+
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-[400px]">
@@ -57,14 +117,66 @@ const MovieDetail = () => {
 
     return (
         <div className="space-y-8">
+            {/* Success/Error Message */}
+            {message && (
+                <div className={`px-4 py-3 rounded-lg text-sm ${
+                    message.includes('error') || message.includes('An error') || message.includes('Failed')
+                        ? 'bg-red-50 border border-red-200 text-red-600 dark:bg-red-900/20 dark:border-red-800 dark:text-red-400'
+                        : 'bg-green-50 border border-green-200 text-green-600 dark:bg-green-900/20 dark:border-green-800 dark:text-green-400'
+                }`}>
+                    {message}
+                </div>
+            )}
+
             {/* Header: Title and Year */}
             <div className="border-b pb-4 border-gray-200 dark:border-gray-700">
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-                    {movie.title}
-                </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-400 mt-2">
-                    {movie.year}
-                </p>
+                <div className="flex items-center justify-between">
+                    <div>
+                        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+                            {movie.title}
+                        </h1>
+                        <p className="text-xl text-gray-600 dark:text-gray-400 mt-2">
+                            {movie.year}
+                        </p>
+                    </div>
+                    
+                    {/* Favourite Button */}
+                    <button
+                        onClick={handleToggleFavourite}
+                        disabled={favouriteLoading}
+                        className={`group relative w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                            !isLoggedIn
+                                ? 'bg-gray-300 dark:bg-gray-600 cursor-not-allowed'
+                                : isFavourite
+                                    ? 'bg-green-500 hover:bg-green-600 hover:scale-110'
+                                    : 'bg-blue-500 hover:bg-blue-600 hover:scale-110'
+                        }`}
+                        title={!isLoggedIn ? 'Login to add favourite' : isFavourite ? 'Remove from favourites' : 'Add to favourites'}
+                    >
+                        {favouriteLoading ? (
+                            <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+                        ) : isFavourite ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-white">
+                                <path fillRule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z" clipRule="evenodd" />
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6 text-white">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        )}
+                        
+                        {/* Hover tooltip */}
+                        {isLoggedIn && (
+                            <span className={`absolute -bottom-10 left-1/2 transform -translate-x-1/2 ${
+                                isFavourite 
+                                    ? 'bg-red-600 text-white' 
+                                    : 'bg-gray-900 text-white'
+                            } text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`}>
+                                {isFavourite ? 'Remove from favourites' : 'Add to favourites'}
+                            </span>
+                        )}
+                    </button>
+                </div>
             </div>
 
             {/* Main Content: Image + Info */}
