@@ -69,12 +69,10 @@ export default function Register() {
     <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-gray-900">
       <Card className="w-[450px] shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Đăng ký</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold dark:text-white">Đăng ký</CardTitle>
+          <CardDescription className="mt-1 text-gray-600 dark:text-gray-300">
             Tạo tài khoản mới để truy cập tất cả tính năng.{' '}
-            <Link to="/login" className="text-blue-500 font-medium hover:underline">
-              Đăng nhập
-            </Link>
+
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -180,6 +178,9 @@ export default function Register() {
             </form>
           </Form>
         </CardContent>
+        <Link to="/login" className="text-blue-500 font-medium hover:underline text-end mx-8 ">
+              Đăng nhập
+        </Link>
       </Card>
     </div>
   );

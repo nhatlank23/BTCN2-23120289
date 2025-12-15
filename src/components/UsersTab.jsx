@@ -35,11 +35,11 @@ const UsersTab = () => {
             <DropdownMenuTrigger className="outline-none">
                 <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-700 rounded-full pl-1 pr-4 py-1 border hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors cursor-pointer">
                     <Avatar className="w-8 h-8">
-                        <AvatarFallback className="bg-gray-500 text-white text-xs font-bold flex items-center justify-center w-full h-full">
+                        <AvatarFallback className="bg-gray-500 text-white text-md font-bold flex items-center justify-center w-full h-full">
                             {user?.username ? user.username.slice(0, 2).toUpperCase() : "U"}
                         </AvatarFallback>
                     </Avatar>
-                    <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{user?.username}</span>
+                    {/* <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{user?.username}</span> */}
                 </div>
             </DropdownMenuTrigger>
             

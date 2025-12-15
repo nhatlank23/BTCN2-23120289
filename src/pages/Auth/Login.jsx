@@ -48,11 +48,11 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-gray-900">
+    <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-gray-700">
       <Card className="w-[450px] shadow-lg">
         <CardHeader className="pb-4">
           <div className="flex justify-between items-center">
-            <CardTitle className="text-2xl font-bold">Đăng nhập</CardTitle>
+            <CardTitle className="text-2xl dark:text-white font-bold">Đăng nhập</CardTitle>
             <Link to="/register" className="text-sm text-blue-500 font-medium hover:underline">
               Đăng ký
             </Link>
