@@ -1,21 +1,15 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // Check if user is logged in on mount
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
+    // Initialize user from localStorage
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
-    
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+    return (storedUser && storedToken) ? JSON.parse(storedUser) : null;
+  });
+  const [loading, setLoading] = useState(false);
 
   const login = async (email, password) => {
     try {

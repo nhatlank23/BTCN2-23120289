@@ -50,7 +50,7 @@ const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
 FormLabel.displayName = "FormLabel"
 
 const FormControl = React.forwardRef(({ ...props }, ref) => {
-  const { name } = useFormField()
+  const { name: _name } = useFormField()
 
   return <div ref={ref} {...props} />
 })
