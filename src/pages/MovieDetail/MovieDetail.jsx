@@ -167,35 +167,39 @@ const MovieDetail = () => {
                 {/* Right: Details */}
                 <div className="md:col-span-2 space-y-6">
                     {/* Rating */}
-                    {movie.ratings?.imDb && (
-                        <div className="flex items-center gap-2">
-                            <svg className="w-6 h-6 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                            </svg>
-                            <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                                {movie.ratings.imDb}/10
-                            </span>
-                            <span className="text-gray-500 dark:text-gray-400 text-sm ml-2">
-                                (IMDb)
-                            </span>
-                        </div>
-                    )}
+                    <div>
+                        {movie.ratings?.imDb ? (
+                            <div className="flex items-center gap-2">
+                                <svg className="w-6 h-6 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                                    {movie.ratings.imDb}/10
+                                </span>
+                                <span className="text-gray-500 dark:text-gray-400 text-sm ml-2">
+                                    (IMDb)
+                                </span>
+                            </div>
+                        ) : (
+                            <div className="text-gray-500 dark:text-gray-400">
+                                <strong>Rating:</strong> Không có dữ liệu
+                            </div>
+                        )}
+                    </div>
 
                     {/* Runtime */}
-                    {movie.runtime && (
-                        <div>
-                            <span className="text-gray-700 dark:text-gray-300">
-                                <strong>Runtime:</strong> {movie.runtime}
-                            </span>
-                        </div>
-                    )}
+                    <div>
+                        <span className="text-gray-700 dark:text-gray-300">
+                            <strong>Runtime:</strong> {movie.runtime || 'Không có dữ liệu'}
+                        </span>
+                    </div>
 
                     {/* Genres */}
-                    {movie.genres && movie.genres.length > 0 && (
-                        <div>
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                Genres
-                            </h2>
+                    <div>
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                            Genres
+                        </h2>
+                        {movie.genres && movie.genres.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {movie.genres.map((genre, index) => (
                                     <span
@@ -206,15 +210,17 @@ const MovieDetail = () => {
                                     </span>
                                 ))}
                             </div>
-                        </div>
-                    )}
+                        ) : (
+                            <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+                        )}
+                    </div>
 
                     {/* Directors */}
-                    {movie.directors && movie.directors.length > 0 && (
-                        <div>
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                Director{movie.directors.length > 1 ? 's' : ''}
-                            </h2>
+                    <div>
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                            Directors
+                        </h2>
+                        {movie.directors && movie.directors.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {movie.directors.map((director, index) => (
                                     <Link
@@ -226,8 +232,10 @@ const MovieDetail = () => {
                                     </Link>
                                 ))}
                             </div>
-                        </div>
-                    )}
+                        ) : (
+                            <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+                        )}
+                    </div>
 
                     {/* Plot */}
                     <div>

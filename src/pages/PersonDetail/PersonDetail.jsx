@@ -8,6 +8,15 @@ const PersonDetail = () => {
   const [person, setPerson] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showFullBio, setShowFullBio] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setTooltipPosition({
+      x: e.clientX + 15,
+      y: e.clientY + 15
+    });
+  };
 
   useEffect(() => {
     const fetchPersonDetail = async () => {
@@ -64,16 +73,33 @@ const PersonDetail = () => {
       {/* Person Header */}
       <div className="flex flex-col md:flex-row gap-6">
         {/* Person Image */}
-        {person.image && (
-          <div className="flex-shrink-0">
-            <img
-              src={person.image}
-              alt={person.name}
-              className="w-full md:w-64 rounded-lg shadow-lg"
-              onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
-              }}
-            />
+        <div 
+          className="flex-shrink-0 w-full md:w-64 aspect-[2/3] bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg relative"
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onMouseMove={handleMouseMove}
+        >
+          <img
+            src={person.image || 'https://via.placeholder.com/300x450?text=No+Image'}
+            alt={person.name}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
+            }}
+          />
+        </div>
+
+        {/* Tooltip theo chuột */}
+        {showTooltip && (
+          <div 
+            className="fixed z-50 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg pointer-events-none"
+            style={{
+              left: `${tooltipPosition.x}px`,
+              top: `${tooltipPosition.y}px`,
+              transform: 'translate(-50%, -100%)'
+            }}
+          >
+            Image of {person.name}
           </div>
         )}
 
@@ -83,45 +109,45 @@ const PersonDetail = () => {
             {person.name}
           </h1>
 
-          {person.role && (
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              <span className="font-semibold">Vai trò:</span> {person.role}
-            </p>
-          )}
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            <span className="font-semibold">Role:</span> {person.role || 'Không có dữ liệu'}
+          </p>
 
-          {person.summary && (
-            <div className="space-y-2">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Tiểu sử
-              </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {displayBio}
-              </p>
-              {needsTruncate && (
-                <button
-                  onClick={() => setShowFullBio(!showFullBio)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition text-sm font-medium"
-                >
-                  {showFullBio ? 'Thu gọn' : 'Xem thêm'}
-                </button>
-              )}
-            </div>
-          )}
+          <div className="space-y-2">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              Biography
+            </h2>
+            {person.summary ? (
+              <>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {displayBio}
+                </p>
+                {needsTruncate && (
+                  <button
+                    onClick={() => setShowFullBio(!showFullBio)}
+                    className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition text-sm font-medium"
+                  >
+                    {showFullBio ? 'Thu gọn' : 'Xem thêm'}
+                  </button>
+                )}
+              </>
+            ) : (
+              <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+            )}
+          </div>
 
-          {person.birth_date && (
-            <p className="text-gray-600 dark:text-gray-400">
-              <span className="font-semibold">Ngày sinh:</span> {formatBirthDate(person.birth_date)}
-            </p>
-          )}
+          <p className="text-gray-600 dark:text-gray-400">
+            <span className="font-semibold">Birth Date:</span> {formatBirthDate(person.birth_date) || 'Không có dữ liệu'}
+          </p>
         </div>
       </div>
 
       {/* Known For Movies */}
-      {person.known_for && person.known_for.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Nổi tiếng với các phim
-          </h2>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Known For
+        </h2>
+        {person.known_for && person.known_for.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {person.known_for.map((movie) => (
               <Link
@@ -154,8 +180,12 @@ const PersonDetail = () => {
               </Link>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
