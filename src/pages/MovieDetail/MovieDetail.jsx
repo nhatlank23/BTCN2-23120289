@@ -6,6 +6,7 @@ const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showFullPlot, setShowFullPlot] = useState(false);
 
   useEffect(() => {
     const fetchMovieDetail = async () => {
@@ -125,10 +126,23 @@ const MovieDetail = () => {
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                 Plot
               </h2>
-              <div 
-                className="text-gray-700 dark:text-gray-300 leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: movie.plot_full }}
-              />
+              <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <div 
+                  dangerouslySetInnerHTML={{ 
+                    __html: showFullPlot 
+                      ? movie.plot_full 
+                      : movie.plot_full.substring(0, 300) + (movie.plot_full.length > 300 ? '...' : '')
+                  }}
+                />
+                {movie.plot_full.length > 300 && (
+                  <button
+                    onClick={() => setShowFullPlot(!showFullPlot)}
+                    className="text-blue-600 dark:text-blue-400 hover:underline mt-2 font-medium"
+                  >
+                    {showFullPlot ? 'Thu gọn' : 'Xem thêm'}
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
