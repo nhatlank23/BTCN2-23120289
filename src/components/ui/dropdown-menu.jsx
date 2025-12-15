@@ -72,11 +72,22 @@ const DropdownMenuContent = React.forwardRef(({ className, align = "start", chil
 })
 DropdownMenuContent.displayName = "DropdownMenuContent"
 
-const DropdownMenuItem = React.forwardRef(({ className, children, ...props }, ref) => {
+const DropdownMenuItem = React.forwardRef(({ className, children, onClick, ...props }, ref) => {
+  const context = React.useContext(DropdownMenuContext)
+  
+  const handleClick = (e) => {
+    if (onClick) {
+      onClick(e)
+    }
+    // Auto close dropdown after click
+    context?.setOpen(false)
+  }
+  
   return (
     <div
       ref={ref}
       className={`relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 ${className}`}
+      onClick={handleClick}
       {...props}
     >
       {children}

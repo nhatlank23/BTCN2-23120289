@@ -103,3 +103,55 @@ export const logoutUser = async () => {
   localStorage.removeItem('user');
   localStorage.removeItem('token');
 };
+
+// Get User Profile
+export const getUserProfile = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      return { 
+        success: false, 
+        error: 'Chưa đăng nhập' 
+      };
+    }
+
+    const response = await fetch(`${API_BASE_URL}/api/users/profile`, {
+      method: 'GET',
+      headers: {
+        ...getHeaders(),
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      return { 
+        success: true, 
+        data: {
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          phone: data.phone || '',
+          dob: data.dob || '',
+          role: data.role || 'user'
+        }
+      };
+    } else {
+      if (response.status === 403) {
+        return { success: false, error: 'Token không hợp lệ hoặc đã hết hạn' };
+      }
+      return { 
+        success: false, 
+        error: data.message || 'Không thể lấy thông tin người dùng' 
+      };
+    }
+  } catch (error) {
+    console.error('Get profile error:', error);
+    return { 
+      success: false, 
+      error: 'Đã xảy ra lỗi kết nối' 
+    };
+  }
+};

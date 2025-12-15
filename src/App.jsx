@@ -9,6 +9,7 @@ const MovieDetail = lazy(() => import('./pages/MovieDetail/MovieDetail.jsx'));
 const PersonDetail = lazy(() => import('./pages/PersonDetail/PersonDetail.jsx'));
 const Login = lazy(() => import('./pages/Auth/Login.jsx'));
 const Register = lazy(() => import('./pages/Auth/Register.jsx'));
+const Profile = lazy(() => import('./pages/Profile/Profile.jsx'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -42,6 +43,9 @@ function App() {
           
           {/* Route chi tiết người */}
           <Route path="/person/:id" element={<PersonDetail />} />
+          
+          {/* Route profile */}
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </Suspense>
