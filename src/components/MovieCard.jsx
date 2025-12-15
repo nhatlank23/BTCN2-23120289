@@ -4,14 +4,26 @@ import { Link } from 'react-router-dom';
 const MovieCard = ({ movie, size = "normal" }) => {
   return (
     <Link to={`/movie/${movie.id}`} className="flex-shrink-0 cursor-pointer group transition-transform duration-300 hover:scale-120 hover:z-50 relative">
-      <Card className="overflow-hidden border-0 p-0">
-        <div className={`relative overflow-hidden ${size === "large" ? "w-[300px] h-[450px]" : "w-[360px] h-[300px]"
+      <Card className={`overflow-hidden border-0 p-0 ${size === "large" ? "rounded-lg" : ""}`}>
+        <div className={`relative overflow-hidden ${size === "large" ? "w-[300px] h-[450px] rounded-lg" : "w-[360px] h-[300px]"
           }`}>
           <img
             src={movie.image}
             alt={movie.title}
             className="w-full h-full object-cover"
           />
+          {size === "large" && (
+            <div className="absolute rounded-lg inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <p className="text-white text-lg font-semibold line-clamp-2">
+                  {movie.title}
+                </p>
+                {movie.year && (
+                  <p className="text-white/80 text-sm">{movie.year}</p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </Card>
 
