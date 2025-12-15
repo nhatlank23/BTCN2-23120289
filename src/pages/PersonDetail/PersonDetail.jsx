@@ -70,6 +70,24 @@ const PersonDetail = () => {
     ? person.summary.slice(0, bioLimit) + '...' 
     : person?.summary;
 
+  // Group movies by id and merge roles
+  const groupedMovies = person?.known_for?.reduce((acc, movie) => {
+    const existingMovie = acc.find(m => m.id === movie.id);
+    if (existingMovie) {
+      // Merge roles if movie already exists
+      if (movie.role && !existingMovie.roles.includes(movie.role)) {
+        existingMovie.roles.push(movie.role);
+      }
+    } else {
+      // Add new movie with roles array
+      acc.push({
+        ...movie,
+        roles: movie.role ? [movie.role] : []
+      });
+    }
+    return acc;
+  }, []) || [];
+
   return (
     <div className="space-y-8">
       {/* Person Header */}
@@ -149,10 +167,10 @@ const PersonDetail = () => {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Known For
         </h2>
-        {person.known_for && person.known_for.length > 0 ? (
+        {groupedMovies && groupedMovies.length > 0 ? (
           <>
             <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-              {person.known_for
+              {groupedMovies
                 .slice((currentPage - 1) * moviesPerPage, currentPage * moviesPerPage)
                 .map((movie) => (
                   <Link
@@ -178,6 +196,11 @@ const PersonDetail = () => {
                             {movie.year && (
                               <p className="text-white/80 text-xs">{movie.year}</p>
                             )}
+                            {movie.roles && movie.roles.length > 0 && (
+                              <p className="text-white/90 text-xs mt-1">
+                                <span className="font-semibold">Role:</span> {movie.roles.join(', ')}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -187,7 +210,7 @@ const PersonDetail = () => {
             </div>
             
             {/* Pagination */}
-            {person.known_for.length > moviesPerPage && (
+            {groupedMovies.length > moviesPerPage && (
               <div className="mt-6 flex justify-center items-center gap-2">
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
@@ -199,11 +222,11 @@ const PersonDetail = () => {
                   </svg>
                 </button>
                 <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {currentPage} / {Math.ceil(person.known_for.length / moviesPerPage)}
+                  {currentPage} / {Math.ceil(groupedMovies.length / moviesPerPage)}
                 </span>
                 <button
-                  onClick={() => setCurrentPage(prev => Math.min(Math.ceil(person.known_for.length / moviesPerPage), prev + 1))}
-                  disabled={currentPage === Math.ceil(person.known_for.length / moviesPerPage)}
+                  onClick={() => setCurrentPage(prev => Math.min(Math.ceil(groupedMovies.length / moviesPerPage), prev + 1))}
+                  disabled={currentPage === Math.ceil(groupedMovies.length / moviesPerPage)}
                   className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
