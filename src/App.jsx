@@ -3,6 +3,7 @@ import AppLayout from './layouts/AppLayout';
 import Home from './pages/Home/Home.jsx';
 import Search from './pages/Search/Search.jsx';
 import MovieDetail from './pages/MovieDetail/MovieDetail.jsx';
+import PersonDetail from './pages/PersonDetail/PersonDetail.jsx';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         {/* Route chi tiết phim */}
         <Route path="/movie/:id" element={<MovieDetail />} />
         
+        {/* Route chi tiết người */}
+        <Route path="/person/:id" element={<PersonDetail />} />
+
         {/* Các route khác sẽ thêm sau: /login */}
       </Route>
     </Routes>
