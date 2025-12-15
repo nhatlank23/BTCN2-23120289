@@ -7,6 +7,8 @@ const Home = lazy(() => import('./pages/Home/Home.jsx'));
 const Search = lazy(() => import('./pages/Search/Search.jsx'));
 const MovieDetail = lazy(() => import('./pages/MovieDetail/MovieDetail.jsx'));
 const PersonDetail = lazy(() => import('./pages/PersonDetail/PersonDetail.jsx'));
+const Login = lazy(() => import('./pages/Auth/Login.jsx'));
+const Register = lazy(() => import('./pages/Auth/Register.jsx'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -22,6 +24,10 @@ function App() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
+        {/* Auth routes - không dùng layout */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
         {/* Route cha sử dụng Layout */}
         <Route path="/" element={<AppLayout />}>
           
@@ -36,8 +42,6 @@ function App() {
           
           {/* Route chi tiết người */}
           <Route path="/person/:id" element={<PersonDetail />} />
-
-          {/* Các route khác sẽ thêm sau: /login */}
         </Route>
       </Routes>
     </Suspense>

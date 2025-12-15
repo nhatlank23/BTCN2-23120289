@@ -1,15 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Nav = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
+    const { user, logout, isAuthenticated } = useAuth();
 
     const handleSearch = (e) => {
         e.preventDefault();
         if (searchQuery.trim()) {
             navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
         }
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
     };
 
     return (
@@ -29,14 +36,14 @@ const Nav = () => {
                 </Link>
             </div>
 
-            {/* Bên phải: Thanh tìm kiếm */}
-            <form onSubmit={handleSearch} className="flex justify-end gap-2 w-full max-w-md">
+            {/* Giữa: Thanh tìm kiếm */}
+            <form onSubmit={handleSearch} className="flex justify-center gap-2 w-full max-w-md">
                 <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search"
-                    className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 placeholder-gray-400 dark:placeholder-gray-500"
+                    className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 placeholder-gray-400 dark:placeholder-gray-500 w-full"
                 />
                 <button 
                     type="submit"
@@ -45,6 +52,30 @@ const Nav = () => {
                     Search
                 </button>
             </form>
+
+            {/* Bên phải: User menu */}
+            <div className="flex items-center gap-2">
+                {isAuthenticated ? (
+                    <>
+                        <span className="text-sm text-gray-700 dark:text-gray-300 hidden md:block">
+                            {user?.name || user?.email}
+                        </span>
+                        <button
+                            onClick={handleLogout}
+                            className="text-gray-700 dark:text-gray-200 px-3 py-1 rounded-md hover:bg-gray-600 hover:text-white dark:hover:bg-gray-600 font-medium border-2 border-gray-500 dark:border-gray-600 transition-colors text-sm"
+                        >
+                            Đăng xuất
+                        </button>
+                    </>
+                ) : (
+                    <Link
+                        to="/login"
+                        className="text-gray-700 dark:text-gray-200 px-3 py-1 rounded-md hover:bg-gray-600 hover:text-white dark:hover:bg-gray-600 font-medium border-2 border-gray-500 dark:border-gray-600 transition-colors text-sm"
+                    >
+                        Đăng nhập
+                    </Link>
+                )}
+            </div>
         </div>
     );
 };
