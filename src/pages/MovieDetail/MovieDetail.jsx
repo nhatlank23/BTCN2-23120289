@@ -9,6 +9,8 @@ const MovieDetail = () => {
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showFullPlot, setShowFullPlot] = useState(false);
+    const [currentActorPage, setCurrentActorPage] = useState(1);
+    const actorsPerPage = 3;
 
     useEffect(() => {
         const fetchMovieDetail = async () => {
@@ -56,13 +58,76 @@ const MovieDetail = () => {
 
             {/* Main Content: Image + Info */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Left: Poster */}
-                <div className="md:col-span-1">
+                {/* Left: Poster + Cast */}
+                <div className="md:col-span-1 space-y-6">
                     <img
                         src={movie.image}
                         alt={movie.title}
                         className="w-full rounded-lg shadow-lg"
                     />
+
+                    {/* Cast */}
+                    <div>
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                            Casts
+                        </h2>
+                        {movie.actors && movie.actors.length > 0 ? (
+                            <>
+                                <div className="grid grid-cols-3 gap-3">
+                                    {movie.actors
+                                        .slice((currentActorPage - 1) * actorsPerPage, currentActorPage * actorsPerPage)
+                                        .map((actor, index) => (
+                                            <Link
+                                                key={index}
+                                                to={`/person/${actor.id}`}
+                                                className="flex flex-col items-center gap-2 hover:opacity-80 transition"
+                                            >
+                                                <img
+                                                    src={actor.image}
+                                                    alt={actor.name}
+                                                    className="w-full aspect-square rounded-full object-cover"
+                                                    onError={(e) => {
+                                                        e.target.src = 'https://via.placeholder.com/150?text=No+Image';
+                                                    }}
+                                                />
+                                                <span className="text-xs text-center font-medium text-gray-700 dark:text-gray-300 line-clamp-2">
+                                                    {actor.name}
+                                                </span>
+                                            </Link>
+                                        ))}
+                                </div>
+                                {movie.actors.length > actorsPerPage && (
+                                    <div className="mt-4 flex justify-center items-center gap-2">
+                                        <button
+                                            onClick={() => setCurrentActorPage(prev => Math.max(1, prev - 1))}
+                                            disabled={currentActorPage === 1}
+                                            className="p-1 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                                            {currentActorPage} / {Math.ceil(movie.actors.length / actorsPerPage)}
+                                        </span>
+                                        <button
+                                            onClick={() => setCurrentActorPage(prev => Math.min(Math.ceil(movie.actors.length / actorsPerPage), prev + 1))}
+                                            disabled={currentActorPage === Math.ceil(movie.actors.length / actorsPerPage)}
+                                            className="p-1 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="text-center py-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <p className="text-gray-500 dark:text-gray-400 text-sm">Chưa có thông tin diễn viên</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* Right: Details */}
@@ -130,12 +195,12 @@ const MovieDetail = () => {
                         </div>
                     )}
 
-                    {/*Description */}
-                    {movie.plot_full && (
-                        <div>
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                                Plot
-                            </h2>
+                    {/* Plot */}
+                    <div>
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                            Plot
+                        </h2>
+                        {movie.plot_full ? (
                             <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -147,62 +212,37 @@ const MovieDetail = () => {
                                 {movie.plot_full.length > 300 && (
                                     <button
                                         onClick={() => setShowFullPlot(!showFullPlot)}
-                                        className="text-blue-600 dark:text-blue-400 hover:underline mt-2 font-medium"
+                                        className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition mt-2 font-medium"
                                     >
                                         {showFullPlot ? 'Thu gọn' : 'Xem thêm'}
                                     </button>
                                 )}
                             </div>
-                        </div>
-                    )}
+                        ) : (
+                            <div className="text-center py-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <p className="text-gray-500 dark:text-gray-400">Chưa có mô tả cho phim này</p>
+                            </div>
+                        )}
+                    </div>
 
-                    {/* Cast */}
-                    {movie.actors && movie.actors.length > 0 && (
-                        <div>
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                                Cast
-                            </h2>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {movie.actors.map((actor, index) => (
-                                    <Link
-                                        key={index}
-                                        to={`/person/${actor.id}`}
-                                        className="flex items-center gap-3 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded transition"
-                                    >
-                                        {actor.image && (
-                                            <img
-                                                src={actor.image}
-                                                alt={actor.name}
-                                                className="w-12 h-12 rounded-full object-cover"
-                                            />
-                                        )}
-                                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                            {actor.name}
-                                        </span>
-                                    </Link>
+                    {/* Reviews Section */}
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                            Reviews {movie.reviews && movie.reviews.length > 0 && `(${movie.reviews.length})`}
+                        </h2>
+                        {movie.reviews && movie.reviews.length > 0 ? (
+                            <div className="space-y-4">
+                                {movie.reviews.map((review) => (
+                                    <ReviewItem key={review.id} review={review} />
                                 ))}
                             </div>
-                        </div>
-                    )}
+                        ) : (
+                            <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                                <p className="text-gray-500 dark:text-gray-400">Chưa có review nào cho phim này</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-
-            {/* Reviews Section */}
-            <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Reviews {movie.reviews && movie.reviews.length > 0 && `(${movie.reviews.length})`}
-                </h2>
-                {movie.reviews && movie.reviews.length > 0 ? (
-                    <div className="space-y-4">
-                        {movie.reviews.map((review) => (
-                            <ReviewItem key={review.id} review={review} />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <p className="text-gray-500 dark:text-gray-400">No reviews available for this movie</p>
-                    </div>
-                )}
             </div>
         </div>
     );
