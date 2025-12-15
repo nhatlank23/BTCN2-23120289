@@ -10,6 +10,8 @@ const PersonDetail = () => {
   const [showFullBio, setShowFullBio] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 4;
 
   const handleMouseMove = (e) => {
     setTooltipPosition({
@@ -148,38 +150,69 @@ const PersonDetail = () => {
           Known For
         </h2>
         {person.known_for && person.known_for.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {person.known_for.map((movie) => (
-              <Link
-                key={movie.id}
-                to={`/movie/${movie.id}`}
-                className="group"
-              >
-                <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 p-0">
-                  <div className="relative aspect-[2/3]">
-                    <img
-                      src={movie.image}
-                      alt={movie.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-3">
-                        <p className="text-white text-sm font-semibold line-clamp-2">
-                          {movie.title}
-                        </p>
-                        {movie.year && (
-                          <p className="text-white/80 text-xs">{movie.year}</p>
-                        )}
+          <>
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+              {person.known_for
+                .slice((currentPage - 1) * moviesPerPage, currentPage * moviesPerPage)
+                .map((movie) => (
+                  <Link
+                    key={movie.id}
+                    to={`/movie/${movie.id}`}
+                    className="group"
+                  >
+                    <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 p-0">
+                      <div className="relative aspect-[2/3]">
+                        <img
+                          src={movie.image}
+                          alt={movie.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-0 left-0 right-0 p-3">
+                            <p className="text-white text-sm font-semibold line-clamp-2">
+                              {movie.title}
+                            </p>
+                            {movie.year && (
+                              <p className="text-white/80 text-xs">{movie.year}</p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </Card>
-              </Link>
-            ))}
-          </div>
+                    </Card>
+                  </Link>
+                ))}
+            </div>
+            
+            {/* Pagination */}
+            {person.known_for.length > moviesPerPage && (
+              <div className="mt-6 flex justify-center items-center gap-2">
+                <button
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {currentPage} / {Math.ceil(person.known_for.length / moviesPerPage)}
+                </span>
+                <button
+                  onClick={() => setCurrentPage(prev => Math.min(Math.ceil(person.known_for.length / moviesPerPage), prev + 1))}
+                  disabled={currentPage === Math.ceil(person.known_for.length / moviesPerPage)}
+                  className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
             <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
