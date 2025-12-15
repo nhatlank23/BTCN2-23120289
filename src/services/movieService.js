@@ -80,3 +80,9 @@ export const getMovieDetail = async (movieId) => {
   // API có thể trả về trực tiếp movie object hoặc { data: movie }
   return response?.data || response;
 };
+
+// 8. Lấy review movie theo ID movie
+export const getMovieReviews = async (movieId) => {
+  const response = await fetchFromAPI(`/api/movies/${movieId}/reviews`);
+  return response?.data || [];
+}
