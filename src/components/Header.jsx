@@ -21,7 +21,7 @@ const Header = () => {
                     <div className="flex items-center gap-2">
                         <button
                             onClick={toggleTheme}
-                            className={`w-12 h-6 rounded-full relative transition-colors ${isDarkMode ? 'bg-blue-600' : 'bg-gray-300'
+                            className={`cursor-pointer w-12 h-6 rounded-full relative transition-colors ${isDarkMode ? 'bg-blue-600' : 'bg-gray-300'
                                 }`}
                         >
                             <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform shadow-md ${isDarkMode ? 'translate-x-6' : 'translate-x-0.5'
