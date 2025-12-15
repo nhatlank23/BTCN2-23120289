@@ -3,7 +3,7 @@ import { getUserProfile, updateUserProfile } from '../../services/authService';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Profile() {
     const [profile, setProfile] = useState(null);
@@ -219,6 +219,20 @@ export default function Profile() {
                                 }
                             />
                         </div>
+
+                        {/* Favourite Link */}
+                        <Link to="/favourite" className="block">
+                            <div className="bg-slate-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gradient-to-r from-[#0255D1] to-[#BE3EFC] transition-colors cursor-pointer">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-base font-medium text-gray-900 dark:text-white">Go to Favourite Movies</span>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-gray-400">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </Link>
                     </div>
                 </CardContent>
             </Card>
