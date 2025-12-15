@@ -16,7 +16,7 @@ const Nav = () => {
         <div className="bg-[#D3E1FC] dark:bg-[#1e3a5f] border-b px-4 py-1 flex gap-4 items-center justify-between border-2 border-[#C3CFE8] dark:border-[#2d4a6b] rounded-md transition-colors">
             {/* Bên trái: Nút Home */}
             <div className="flex items-center gap-4">
-                <Link to="/" className="p-1.5 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                <Link to="/" className="p-1.5 rounded transition ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"

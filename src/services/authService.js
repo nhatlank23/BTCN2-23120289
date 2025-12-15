@@ -83,23 +83,29 @@ export const registerUser = async (username, email, password, phone = '', dob = 
   }
 };
 
-// Logout (if API requires, otherwise just client-side)
+// Logout with API call
 export const logoutUser = async () => {
-  // If your API has logout endpoint:
-  // try {
-  //   const token = localStorage.getItem('token');
-  //   await fetch(`${API_BASE_URL}/api/users/logout`, {
-  //     method: 'POST',
-  //     headers: {
-  //       ...getHeaders(),
-  //       'Authorization': `Bearer ${token}`
-  //     }
-  //   });
-  // } catch (error) {
-  //   console.error('Logout error:', error);
-  // }
+  try {
+    const token = localStorage.getItem('token');
+    
+    if (token) {
+      const response = await fetch(`${API_BASE_URL}/api/users/logout`, {
+        method: 'POST',
+        headers: {
+          ...getHeaders(),
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      // Don't check response status, just clean up locally
+      // even if API call fails
+    }
+  } catch (error) {
+    console.error('Logout error:', error);
+    // Continue with local cleanup even if API fails
+  }
   
-  // Client-side logout
+  // Always clean up local storage
   localStorage.removeItem('user');
   localStorage.removeItem('token');
 };
@@ -149,6 +155,65 @@ export const getUserProfile = async () => {
     }
   } catch (error) {
     console.error('Get profile error:', error);
+    return { 
+      success: false, 
+      error: 'Đã xảy ra lỗi kết nối' 
+    };
+  }
+};
+
+// Update User Profile
+export const updateUserProfile = async (phone, dob, email) => {
+  try {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      return { 
+        success: false, 
+        error: 'Chưa đăng nhập' 
+      };
+    }
+
+    const body = {};
+    if (phone !== undefined && phone !== null) body.phone = phone;
+    if (dob !== undefined && dob !== null) body.dob = dob;
+    if (email !== undefined && email !== null) body.email = email;
+
+    const response = await fetch(`${API_BASE_URL}/api/users/profile`, {
+      method: 'PATCH',
+      headers: {
+        ...getHeaders(),
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(body)
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      return { 
+        success: true, 
+        message: 'Cập nhật thành công',
+        data: {
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          phone: data.phone || '',
+          dob: data.dob || '',
+          role: data.role || 'user'
+        }
+      };
+    } else {
+      if (response.status === 403) {
+        return { success: false, error: 'Token không hợp lệ hoặc đã hết hạn' };
+      }
+      return { 
+        success: false, 
+        error: data.message || 'Không thể cập nhật thông tin' 
+      };
+    }
+  } catch (error) {
+    console.error('Update profile error:', error);
     return { 
       success: false, 
       error: 'Đã xảy ra lỗi kết nối' 
