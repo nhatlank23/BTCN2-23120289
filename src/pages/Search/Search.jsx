@@ -28,8 +28,10 @@ const Search = () => {
         // 3. Lấy phim từ các người tìm được
         const moviesFromPeople = [];
         for (const person of peopleResults) {
-          const personMovies = await getPersonDetail(person.id);
-          // getPersonDetail đã trả về known_for array (là danh sách movies)
+          const personDetail = await getPersonDetail(person.id);
+          const personMovies = personDetail?.known_for || [];
+
+          // getPersonDetail trả về person object, lấy known_for array từ đó
           if (personMovies && personMovies.length > 0) {
             moviesFromPeople.push(...personMovies);
           }
