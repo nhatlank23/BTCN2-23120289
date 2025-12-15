@@ -121,7 +121,7 @@ const MovieDetail = () => {
                                                 <img
                                                     src={actor.image}
                                                     alt={actor.name}
-                                                    className="w-full aspect-square rounded-full object-cover"
+                                                    className="w-full aspect-square rounded-full object-cover border-2 border-gray-300 dark:border-gray-600"
                                                     onError={(e) => {
                                                         e.target.src = 'https://via.placeholder.com/150?text=No+Image';
                                                     }}
@@ -256,7 +256,7 @@ const MovieDetail = () => {
                                 {movie.plot_full.length > 300 && (
                                     <button
                                         onClick={() => setShowFullPlot(!showFullPlot)}
-                                        className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition mt-2 font-medium"
+                                        className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition mt-2 font-medium cursor-pointer"
                                     >
                                         {showFullPlot ? 'Thu gọn' : 'Xem thêm'}
                                     </button>

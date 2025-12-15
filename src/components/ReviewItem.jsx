@@ -25,7 +25,7 @@ const ReviewItem = ({ review }) => {
                 <span className="font-semibold text-gray-900 dark:text-white">
                     {review.user}
                 </span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
+                <span className="text-sm text-gray-500 dark:text-gray-400 italic">
                     {formatDate(review.date)}
                 </span>
             </div>
@@ -38,7 +38,7 @@ const ReviewItem = ({ review }) => {
                 {needsTruncate && (
                     <button
                         onClick={() => setShowFullContent(!showFullContent)}
-                        className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition text-sm font-medium mt-2"
+                        className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition text-sm font-medium mt-2 cursor-pointer"
                     >
                         {showFullContent ? 'Thu gọn' : 'Xem thêm'}
                     </button>
