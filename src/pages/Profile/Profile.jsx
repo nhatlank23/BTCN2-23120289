@@ -16,6 +16,13 @@ export default function Profile() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Check if user is logged in
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
         const fetchProfile = async () => {
             setLoading(true);
             const result = await getUserProfile();
