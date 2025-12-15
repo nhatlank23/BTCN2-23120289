@@ -32,7 +32,7 @@ const Home = () => {
   }, []);
 
   // Lấy top 5 phim có rating cao nhất cho Featured Carousel
-  const top5FeaturedMovies = getTopMovies(ratingMovies, 5);
+  const top5FeaturedMovies = getTopMovies(popularMovies, 5);
 
   if (loading) {
     return (
