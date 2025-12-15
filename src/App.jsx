@@ -10,6 +10,7 @@ const PersonDetail = lazy(() => import('./pages/PersonDetail/PersonDetail.jsx'))
 const Login = lazy(() => import('./pages/Auth/Login.jsx'));
 const Register = lazy(() => import('./pages/Auth/Register.jsx'));
 const Profile = lazy(() => import('./pages/Profile/Profile.jsx'));
+const Favourite = lazy(() => import('./pages/Favourite/Favourite.jsx'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -46,6 +47,9 @@ function App() {
           
           {/* Route profile */}
           <Route path="/profile" element={<Profile />} />
+          
+          {/* Route favourite */}
+          <Route path="/favourite" element={<Favourite />} />
         </Route>
       </Routes>
     </Suspense>
