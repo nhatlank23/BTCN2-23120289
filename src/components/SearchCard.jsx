@@ -2,15 +2,23 @@ import { Card } from "./ui/card";
 import { Link } from 'react-router-dom';
 
 const SearchCard = ({ movie }) => {
+  // Fallback for different API response formats
+  const posterUrl = movie.image_url || movie.image || movie.poster_path 
+    ? (movie.image_url || movie.image || `https://image.tmdb.org/t/p/w500${movie.poster_path}`)
+    : 'https://via.placeholder.com/300x450?text=No+Image';
+
   return (
     <Link to={`/movie/${movie.id}`}>
       <Card className="overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow p-0 cursor-pointer">
         {/* Poster Image */}
         <div className="relative w-full h-[400px] overflow-hidden">
           <img 
-            src={movie.image} 
+            src={posterUrl} 
             alt={movie.title}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
+            }}
           />
         </div>
 
