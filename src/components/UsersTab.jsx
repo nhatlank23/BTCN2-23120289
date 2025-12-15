@@ -25,7 +25,7 @@ const UsersTab = () => {
                 to="/login"
                 className="text-sm font-medium text-gray-700 dark:text-gray-200  hover:text-[#774743] dark:hover:text-blue-400 underline decoration-1 underline-offset-2 transition-colors"
             >
-                Đăng nhập
+                Sign In
             </Link>
         );
     }

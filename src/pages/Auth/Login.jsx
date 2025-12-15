@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useNavigate, Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import ThemeToggle from "../../components/ThemeToggle";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Please enter username"),
@@ -28,11 +29,11 @@ export default function Login() {
   async function onSubmit(values) {
     setIsLoading(true);
     setError("");
-    
+
     try {
       const result = await login(values.username, values.password);
       console.log('Login result:', result);
-      
+
       if (result.success) {
         console.log('Login successful, navigating to home...');
         navigate("/", { replace: true });
@@ -53,9 +54,9 @@ export default function Login() {
         <CardHeader className="pb-4">
           <div className="flex justify-between items-center">
             <CardTitle className="text-2xl dark:text-white font-bold">Login</CardTitle>
-            <Link to="/register" className="text-sm text-blue-500 font-medium hover:underline">
-              Register
-            </Link>
+            <div className="flex items-center gap-4">
+              <ThemeToggle />
+            </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -66,7 +67,7 @@ export default function Login() {
                   {error}
                 </div>
               )}
-              
+
               <FormField
                 control={form.control}
                 name="username"
@@ -80,7 +81,7 @@ export default function Login() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="password"
@@ -94,9 +95,9 @@ export default function Login() {
                   </FormItem>
                 )}
               />
-              
-              <Button 
-                type="submit" 
+
+              <Button
+                type="submit"
                 disabled={isLoading}
                 className="w-full h-11 bg-blue-500 hover:bg-blue-600 text-lg font-medium disabled:opacity-50"
               >
@@ -105,6 +106,9 @@ export default function Login() {
             </form>
           </Form>
         </CardContent>
+        <Link to="/register" className="text-blue-500 font-medium hover:underline text-end mx-8 mt-[-18px]">
+          Register
+        </Link>
       </Card>
     </div>
   );

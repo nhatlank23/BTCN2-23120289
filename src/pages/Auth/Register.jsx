@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useNavigate, Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useState } from "react";
+import ThemeToggle from "../../components/ThemeToggle";
 
 const registerSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
@@ -69,7 +70,10 @@ export default function Register() {
     <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-gray-900">
       <Card className="w-[450px] shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold dark:text-white">Register</CardTitle>
+          <div className="flex justify-between items-center mb-2">
+            <CardTitle className="text-2xl font-bold dark:text-white">Register</CardTitle>
+            <ThemeToggle />
+          </div>
           <CardDescription className="mt-1 text-gray-600 dark:text-gray-300">
             Create a new account to access all features.{' '}
 
@@ -178,7 +182,7 @@ export default function Register() {
             </form>
           </Form>
         </CardContent>
-        <Link to="/login" className="text-blue-500 font-medium hover:underline text-end mx-8 ">
+        <Link to="/login" className="text-blue-500 font-medium hover:underline text-end mx-8 mt-[-18px] ">
               Login
         </Link>
       </Card>
