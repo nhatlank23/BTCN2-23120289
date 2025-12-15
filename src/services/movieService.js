@@ -72,3 +72,9 @@ export const getPersonDetail = async (personId) => {
   console.log(`Person detail for ID ${personId}:`, response.known_for);
   return response?.known_for || [];
 };
+
+// 7. Lấy chi tiết movie theo ID
+export const getMovieDetail = async (movieId) => {
+  const response = await fetchFromAPI(`/api/movies/${movieId}`);
+  return response?.data;
+};

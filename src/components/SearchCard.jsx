@@ -1,16 +1,18 @@
 import { Card } from "./ui/card";
+import { Link } from 'react-router-dom';
 
 const SearchCard = ({ movie }) => {
   return (
-    <Card className="overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-sshadow p-0">
-      {/* Poster Image */}
-      <div className="relative w-full h-[400px] overflow-hidden">
-        <img 
-          src={movie.image} 
-          alt={movie.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <Link to={`/movie/${movie.id}`}>
+      <Card className="overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow p-0 cursor-pointer">
+        {/* Poster Image */}
+        <div className="relative w-full h-[400px] overflow-hidden">
+          <img 
+            src={movie.image} 
+            alt={movie.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
 
       {/* Movie Info */}
       <div className="p-4 space-y-2">
@@ -34,6 +36,7 @@ const SearchCard = ({ movie }) => {
         )}
       </div>
     </Card>
+    </Link>
   );
 };
 

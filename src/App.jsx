@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import AppLayout from './layouts/AppLayout';
 import Home from './pages/Home/Home.jsx';
 import Search from './pages/Search/Search.jsx';
+import MovieDetail from './pages/MovieDetail/MovieDetail.jsx';
 
 function App() {
   return (
@@ -15,7 +16,10 @@ function App() {
         {/* Route tìm kiếm */}
         <Route path="/search" element={<Search />} />
         
-        {/* Các route khác sẽ thêm sau: /login, /movie/:id */}
+        {/* Route chi tiết phim */}
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        
+        {/* Các route khác sẽ thêm sau: /login */}
       </Route>
     </Routes>
   );

@@ -34,7 +34,7 @@ const Search = () => {
             moviesFromPeople.push(...personMovies);
           }
         }
-        
+        console.log('Movies from people:', moviesFromPeople);
         // 4. Merge và loại trùng (dựa vào id)
         const allMovies = [...movieResults, ...moviesFromPeople];
         const uniqueMovies = Array.from(
