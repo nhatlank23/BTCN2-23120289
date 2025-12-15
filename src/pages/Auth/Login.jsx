@@ -10,8 +10,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 
 const loginSchema = z.object({
-  username: z.string().min(1, "Vui lòng nhập username"),
-  password: z.string().min(1, "Vui lòng nhập mật khẩu"),
+  username: z.string().min(1, "Please enter username"),
+  password: z.string().min(1, "Please enter password"),
 });
 
 export default function Login() {
@@ -37,10 +37,10 @@ export default function Login() {
         console.log('Login successful, navigating to home...');
         navigate("/", { replace: true });
       } else {
-        setError(result.error || "Sai tài khoản hoặc mật khẩu!");
+        setError(result.error || "Incorrect username or password!");
       }
     } catch (err) {
-      setError("Đã xảy ra lỗi. Vui lòng thử lại!");
+      setError("An error occurred. Please try again!");
       console.error('Login error:', err);
     } finally {
       setIsLoading(false);
@@ -52,9 +52,9 @@ export default function Login() {
       <Card className="w-[450px] shadow-lg">
         <CardHeader className="pb-4">
           <div className="flex justify-between items-center">
-            <CardTitle className="text-2xl dark:text-white font-bold">Đăng nhập</CardTitle>
+            <CardTitle className="text-2xl dark:text-white font-bold">Login</CardTitle>
             <Link to="/register" className="text-sm text-blue-500 font-medium hover:underline">
-              Đăng ký
+              Register
             </Link>
           </div>
         </CardHeader>
@@ -74,7 +74,7 @@ export default function Login() {
                   <FormItem>
                     <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Nhập username" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                      <Input placeholder="Enter username" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>
@@ -86,7 +86,7 @@ export default function Login() {
                 name="password"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Mật khẩu</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Password</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="••••••" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
@@ -100,7 +100,7 @@ export default function Login() {
                 disabled={isLoading}
                 className="w-full h-11 bg-blue-500 hover:bg-blue-600 text-lg font-medium disabled:opacity-50"
               >
-                {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
+                {isLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
           </Form>

@@ -10,14 +10,14 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useState } from "react";
 
 const registerSchema = z.object({
-  username: z.string().min(3, "Username phải có ít nhất 3 ký tự"),
-  email: z.string().min(1, "Vui lòng nhập email").email("Email không hợp lệ"),
-  password: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
-  confirmPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu"),
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().min(1, "Please enter email").email("Invalid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().min(1, "Please confirm password"),
   phone: z.string().optional(),
   dob: z.string().optional(),
 }).refine((data) => data.password === data.confirmPassword, {
-  message: "Mật khẩu không khớp",
+  message: "Passwords do not match",
   path: ["confirmPassword"],
 });
 
@@ -55,10 +55,10 @@ export default function Register() {
       if (result.success) {
         navigate("/");
       } else {
-        setError(result.error || "Đăng ký thất bại!");
+        setError(result.error || "Registration failed!");
       }
     } catch (err) {
-      setError("Đã xảy ra lỗi. Vui lòng thử lại!");
+      setError("An error occurred. Please try again!");
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -69,9 +69,9 @@ export default function Register() {
     <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-gray-900">
       <Card className="w-[450px] shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold dark:text-white">Đăng ký</CardTitle>
+          <CardTitle className="text-2xl font-bold dark:text-white">Register</CardTitle>
           <CardDescription className="mt-1 text-gray-600 dark:text-gray-300">
-            Tạo tài khoản mới để truy cập tất cả tính năng.{' '}
+            Create a new account to access all features.{' '}
 
           </CardDescription>
         </CardHeader>
@@ -91,7 +91,7 @@ export default function Register() {
                   <FormItem>
                     <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Nhập username" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                      <Input placeholder="Enter username" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>
@@ -117,7 +117,7 @@ export default function Register() {
                 name="phone"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Số điện thoại (tùy chọn)</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Phone (optional)</FormLabel>
                     <FormControl>
                       <Input placeholder="0123456789" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
@@ -131,7 +131,7 @@ export default function Register() {
                 name="dob"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Ngày sinh (tùy chọn)</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Date of Birth (optional)</FormLabel>
                     <FormControl>
                       <Input type="date" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
@@ -145,9 +145,9 @@ export default function Register() {
                 name="password"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Mật khẩu</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Nhập mật khẩu" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                      <Input type="password" placeholder="Enter password" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>
@@ -159,9 +159,9 @@ export default function Register() {
                 name="confirmPassword"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Xác nhận mật khẩu</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Confirm Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Nhập lại mật khẩu" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                      <Input type="password" placeholder="Re-enter password" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>
@@ -173,13 +173,13 @@ export default function Register() {
                 disabled={isLoading}
                 className="w-full h-11 bg-blue-500 hover:bg-blue-600 text-lg mt-2 disabled:opacity-50"
               >
-                {isLoading ? "Đang đăng ký..." : "Đăng ký"}
+                {isLoading ? "Registering..." : "Register"}
               </Button>
             </form>
           </Form>
         </CardContent>
         <Link to="/login" className="text-blue-500 font-medium hover:underline text-end mx-8 ">
-              Đăng nhập
+              Login
         </Link>
       </Card>
     </div>

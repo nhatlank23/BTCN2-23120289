@@ -130,7 +130,7 @@ const PersonDetail = () => {
           </h1>
 
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            <span className="font-semibold">Role:</span> {person.role || 'Không có dữ liệu'}
+            <span className="font-semibold">Role:</span> {person.role || 'No data available'}
           </p>
 
           <div className="space-y-2">
@@ -147,17 +147,17 @@ const PersonDetail = () => {
                     onClick={() => setShowFullBio(!showFullBio)}
                     className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition text-sm font-medium"
                   >
-                    {showFullBio ? 'Thu gọn' : 'Xem thêm'}
+                    {showFullBio ? 'Show less' : 'Show more'}
                   </button>
                 )}
               </>
             ) : (
-              <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+              <p className="text-gray-500 dark:text-gray-400">No data available</p>
             )}
           </div>
 
           <p className="text-gray-600 dark:text-gray-400">
-            <span className="font-semibold">Birth Date:</span> {formatBirthDate(person.birth_date) || 'Không có dữ liệu'}
+            <span className="font-semibold">Birth Date:</span> {formatBirthDate(person.birth_date) || 'No data available'}
           </p>
         </div>
       </div>
@@ -238,7 +238,7 @@ const PersonDetail = () => {
           </>
         ) : (
           <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+            <p className="text-gray-500 dark:text-gray-400">No data available</p>
           </div>
         )}
       </div>

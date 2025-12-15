@@ -160,7 +160,7 @@ const MovieDetail = () => {
                             </>
                         ) : (
                             <div className="text-center py-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                <p className="text-gray-500 dark:text-gray-400 text-sm">Chưa có thông tin diễn viên</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-sm">No cast information available</p>
                             </div>
                         )}
                     </div>
@@ -184,7 +184,7 @@ const MovieDetail = () => {
                             </div>
                         ) : (
                             <div className="text-gray-500 dark:text-gray-400">
-                                <strong>Rating:</strong> Không có dữ liệu
+                                <strong>Rating:</strong> No data available
                             </div>
                         )}
                     </div>
@@ -192,7 +192,7 @@ const MovieDetail = () => {
                     {/* Runtime */}
                     <div>
                         <span className="text-gray-700 dark:text-gray-300">
-                            <strong>Runtime:</strong> {movie.runtime || 'Không có dữ liệu'}
+                            <strong>Runtime:</strong> {movie.runtime || 'No data available'}
                         </span>
                     </div>
 
@@ -213,7 +213,7 @@ const MovieDetail = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+                            <p className="text-gray-500 dark:text-gray-400">No data available</p>
                         )}
                     </div>
 
@@ -235,7 +235,7 @@ const MovieDetail = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p className="text-gray-500 dark:text-gray-400">Không có dữ liệu</p>
+                            <p className="text-gray-500 dark:text-gray-400">No data available</p>
                         )}
                     </div>
 
@@ -258,13 +258,13 @@ const MovieDetail = () => {
                                         onClick={() => setShowFullPlot(!showFullPlot)}
                                         className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition mt-2 font-medium cursor-pointer"
                                     >
-                                        {showFullPlot ? 'Thu gọn' : 'Xem thêm'}
+                                        {showFullPlot ? 'Show less' : 'Show more'}
                                     </button>
                                 )}
                             </div>
                         ) : (
                             <div className="text-center py-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                <p className="text-gray-500 dark:text-gray-400">Chưa có mô tả cho phim này</p>
+                                <p className="text-gray-500 dark:text-gray-400">No plot description available</p>
                             </div>
                         )}
                     </div>
@@ -313,7 +313,7 @@ const MovieDetail = () => {
                             </>
                         ) : (
                             <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                                <p className="text-gray-500 dark:text-gray-400">Chưa có review nào cho phim này</p>
+                                <p className="text-gray-500 dark:text-gray-400">No reviews available for this movie</p>
                             </div>
                         )}
                     </div>

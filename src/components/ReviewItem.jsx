@@ -40,7 +40,7 @@ const ReviewItem = ({ review }) => {
                         onClick={() => setShowFullContent(!showFullContent)}
                         className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition text-sm font-medium mt-2 cursor-pointer"
                     >
-                        {showFullContent ? 'Thu gọn' : 'Xem thêm'}
+                        {showFullContent ? 'Show less' : 'Show more'}
                     </button>
                 )}
             </div>

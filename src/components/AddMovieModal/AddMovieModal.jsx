@@ -67,7 +67,7 @@ export default function AddMovieModal({ isOpen, onClose, onAddMovie }) {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b dark:border-gray-700 bg-slate-100 dark:bg-gray-700">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-            Thêm phim yêu thích
+            Add Favourite Movie
           </h2>
           <button
             onClick={handleClose}
@@ -95,7 +95,7 @@ export default function AddMovieModal({ isOpen, onClose, onAddMovie }) {
               disabled={loading}
               className="text-gray-700 dark:text-gray-200 px-4 py-1.5 rounded-md hover:bg-gray-600 hover:text-white dark:hover:bg-gray-600 font-medium border-2 border-gray-500 dark:border-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
             >
-              {loading ? 'Tìm...' : 'Search'}
+              {loading ? 'Searching...' : 'Search'}
             </button>
           </form>
         </div>
@@ -144,7 +144,7 @@ export default function AddMovieModal({ isOpen, onClose, onAddMovie }) {
                           ? 'bg-green-500 text-white cursor-default' 
                           : 'bg-blue-500 hover:bg-blue-600 text-white'
                       }`}
-                      title={isAdded ? 'Đã thêm' : 'Thêm vào yêu thích'}
+                      title={isAdded ? 'Added' : 'Add to favourites'}
                     >
                       {isAdded ? (
                         // Dấu tích
@@ -167,7 +167,7 @@ export default function AddMovieModal({ isOpen, onClose, onAddMovie }) {
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 mx-auto mb-2 opacity-50">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
-              <p className="text-sm">Nhập tên phim và nhấn Search</p>
+              <p className="text-sm">Enter movie name and click Search</p>
             </div>
           )}
         </div>

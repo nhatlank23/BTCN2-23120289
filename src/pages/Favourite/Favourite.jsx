@@ -56,7 +56,7 @@ const Favourite = () => {
     console.log('Add result:', result);
     
     if (result.success) {
-      setSuccessMessage(`Đã thêm "${movie.title}" vào danh sách yêu thích`);
+      setSuccessMessage(`Added "${movie.title}" to your favourite list`);
       setTimeout(() => setSuccessMessage(''), 3000);
       
       // Refresh the list
@@ -106,14 +106,14 @@ const Favourite = () => {
     }
 
     if (successCount > 0) {
-      setSuccessMessage(`Đã xóa ${successCount} phim khỏi danh sách yêu thích`);
+      setSuccessMessage(`Removed ${successCount} movie${successCount > 1 ? 's' : ''} from your favourite list`);
       setTimeout(() => setSuccessMessage(''), 3000);
       await fetchFavourites();
       setSelectedMovies(new Set());
     }
 
     if (failCount > 0) {
-      setError(`Không thể xóa ${failCount} phim`);
+      setError(`Failed to remove ${failCount} movie${failCount > 1 ? 's' : ''}`);
       setTimeout(() => setError(''), 3000);
     }
 
@@ -161,8 +161,8 @@ const Favourite = () => {
               Favourite Movies
             </h1>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
-              {movies.length} movies in the list
-              {selectedMovies.size > 0 && ` • ${selectedMovies.size} movies selected`}
+              {movies.length} movie{movies.length !== 1 ? 's' : ''} in the list
+              {selectedMovies.size > 0 && ` • ${selectedMovies.size} movie${selectedMovies.size !== 1 ? 's' : ''} selected`}
             </p>
           </div>
           <div className="flex gap-3">
