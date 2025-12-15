@@ -83,6 +83,13 @@ const Favourite = () => {
   const handleDeleteSelected = async () => {
     if (selectedMovies.size === 0) return;
 
+    // Hiển thị popup xác nhận
+    const confirmed = window.confirm(
+      `Are you sure you want to remove ${selectedMovies.size} movie${selectedMovies.size > 1 ? 's' : ''} from your favourite list?`
+    );
+    
+    if (!confirmed) return;
+
     setIsDeleting(true);
     setError('');
 
