@@ -188,18 +188,22 @@ const MovieDetail = () => {
             </div>
 
             {/* Reviews Section */}
-            {movie.reviews && movie.reviews.length > 0 && (
-                <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                        Reviews ({movie.reviews.length})
-                    </h2>
+            <div className="space-y-4">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    Reviews {movie.reviews && movie.reviews.length > 0 && `(${movie.reviews.length})`}
+                </h2>
+                {movie.reviews && movie.reviews.length > 0 ? (
                     <div className="space-y-4">
                         {movie.reviews.map((review) => (
                             <ReviewItem key={review.id} review={review} />
                         ))}
                     </div>
-                </div>
-            )}
+                ) : (
+                    <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <p className="text-gray-500 dark:text-gray-400">No reviews available for this movie</p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

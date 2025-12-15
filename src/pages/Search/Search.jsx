@@ -8,6 +8,8 @@ const Search = () => {
   const query = searchParams.get('query') || '';
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const moviesPerPage = 6;
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -44,6 +46,7 @@ const Search = () => {
         );
         
         setMovies(uniqueMovies);
+        setCurrentPage(1); // Reset về trang 1 khi search mới
       } catch (error) {
         console.error('Error searching movies:', error);
         setMovies([]);
@@ -54,6 +57,17 @@ const Search = () => {
 
     fetchSearchResults();
   }, [query]);
+
+  // Tính toán pagination
+  const totalPages = Math.ceil(movies.length / moviesPerPage);
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="space-y-6">
@@ -74,11 +88,64 @@ const Search = () => {
         </div>
       ) : (
         <>
+          {/* Results count */}
+          <div className="flex justify-between items-center">
+            <p className="text-gray-700 dark:text-gray-300">
+              found <span className="font-semibold">{movies.length}</span> movies
+            </p>
+            {totalPages > 1 && (
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Page {currentPage} / {totalPages}
+              </p>
+            )}
+          </div>
+
+          {/* Movies grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {movies.map((movie) => (
+            {currentMovies.map((movie) => (
               <SearchCard key={movie.id} movie={movie} />
             ))}
           </div>
+
+          {/* Pagination controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-8">
+              {/* Previous button */}
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition text-lg font-bold"
+              >
+                &lt;
+              </button>
+
+              {/* Page numbers */}
+              <div className="flex gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={`px-3 py-2 rounded-md transition ${
+                      currentPage === pageNum
+                        ? 'bg-blue-600 text-white dark:bg-blue-500'
+                        : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+              </div>
+
+              {/* Next button */}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition text-lg font-bold"
+              >
+                &gt;
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>
