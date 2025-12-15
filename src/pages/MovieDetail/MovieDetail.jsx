@@ -10,7 +10,16 @@ const MovieDetail = () => {
     const [loading, setLoading] = useState(true);
     const [showFullPlot, setShowFullPlot] = useState(false);
     const [currentActorPage, setCurrentActorPage] = useState(1);
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
     const actorsPerPage = 3;
+
+    const handleMouseMove = (e) => {
+        setTooltipPosition({
+            x: e.clientX + 15,
+            y: e.clientY + 15
+        });
+    };
 
     useEffect(() => {
         const fetchMovieDetail = async () => {
@@ -60,11 +69,36 @@ const MovieDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Left: Poster + Cast */}
                 <div className="md:col-span-1 space-y-6">
-                    <img
-                        src={movie.image}
-                        alt={movie.title}
-                        className="w-full rounded-lg shadow-lg"
-                    />
+                    {/* Poster with fixed aspect ratio */}
+                    <div 
+                        className="w-full aspect-[2/3] bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg relative"
+                        onMouseEnter={() => setShowTooltip(true)}
+                        onMouseLeave={() => setShowTooltip(false)}
+                        onMouseMove={handleMouseMove}
+                    >
+                        <img
+                            src={movie.image}
+                            alt={movie.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                                e.target.src = 'https://via.placeholder.com/300x450?text=No+Image';
+                            }}
+                        />
+                    </div>
+
+                    {/* Tooltip theo chuột */}
+                    {showTooltip && (
+                        <div 
+                            className="fixed z-50 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg pointer-events-none"
+                            style={{
+                                left: `${tooltipPosition.x}px`,
+                                top: `${tooltipPosition.y}px`,
+                                transform: 'translate(-50%, -100%)'
+                            }}
+                        >
+                            Image of {movie.title}
+                        </div>
+                    )}
 
                     {/* Cast */}
                     <div>
