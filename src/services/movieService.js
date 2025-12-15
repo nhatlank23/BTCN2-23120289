@@ -76,5 +76,7 @@ export const getPersonDetail = async (personId) => {
 // 7. Lấy chi tiết movie theo ID
 export const getMovieDetail = async (movieId) => {
   const response = await fetchFromAPI(`/api/movies/${movieId}`);
-  return response?.data;
+  console.log('Movie detail response:', response);
+  // API có thể trả về trực tiếp movie object hoặc { data: movie }
+  return response?.data || response;
 };
