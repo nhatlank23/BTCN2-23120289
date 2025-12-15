@@ -10,9 +10,11 @@ const MovieDetail = () => {
     const [loading, setLoading] = useState(true);
     const [showFullPlot, setShowFullPlot] = useState(false);
     const [currentActorPage, setCurrentActorPage] = useState(1);
+    const [currentReviewPage, setCurrentReviewPage] = useState(1);
     const [showTooltip, setShowTooltip] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
     const actorsPerPage = 3;
+    const reviewsPerPage = 4;
 
     const handleMouseMove = (e) => {
         setTooltipPosition({
@@ -273,11 +275,42 @@ const MovieDetail = () => {
                             Reviews {movie.reviews && movie.reviews.length > 0 && `(${movie.reviews.length})`}
                         </h2>
                         {movie.reviews && movie.reviews.length > 0 ? (
-                            <div className="space-y-4">
-                                {movie.reviews.map((review) => (
-                                    <ReviewItem key={review.id} review={review} />
-                                ))}
-                            </div>
+                            <>
+                                <div className="space-y-4">
+                                    {movie.reviews
+                                        .slice((currentReviewPage - 1) * reviewsPerPage, currentReviewPage * reviewsPerPage)
+                                        .map((review) => (
+                                            <ReviewItem key={review.id} review={review} />
+                                        ))}
+                                </div>
+                                
+                                {/* Pagination */}
+                                {movie.reviews.length > reviewsPerPage && (
+                                    <div className="mt-6 flex justify-center items-center gap-2">
+                                        <button
+                                            onClick={() => setCurrentReviewPage(prev => Math.max(1, prev - 1))}
+                                            disabled={currentReviewPage === 1}
+                                            className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                                            {currentReviewPage} / {Math.ceil(movie.reviews.length / reviewsPerPage)}
+                                        </span>
+                                        <button
+                                            onClick={() => setCurrentReviewPage(prev => Math.min(Math.ceil(movie.reviews.length / reviewsPerPage), prev + 1))}
+                                            disabled={currentReviewPage === Math.ceil(movie.reviews.length / reviewsPerPage)}
+                                            className="p-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
                         ) : (
                             <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
                                 <p className="text-gray-500 dark:text-gray-400">Chưa có review nào cho phim này</p>
