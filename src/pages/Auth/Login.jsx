@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 
 const loginSchema = z.object({
-  email: z.string().min(1, "Vui lòng nhập email").email("Email không hợp lệ"),
+  username: z.string().min(1, "Vui lòng nhập username"),
   password: z.string().min(1, "Vui lòng nhập mật khẩu"),
 });
 
@@ -22,7 +22,7 @@ export default function Login() {
 
   const form = useForm({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { username: "", password: "" },
   });
 
   async function onSubmit(values) {
@@ -30,16 +30,18 @@ export default function Login() {
     setError("");
     
     try {
-      const result = await login(values.email, values.password);
+      const result = await login(values.username, values.password);
+      console.log('Login result:', result);
       
       if (result.success) {
-        navigate("/");
+        console.log('Login successful, navigating to home...');
+        navigate("/", { replace: true });
       } else {
         setError(result.error || "Sai tài khoản hoặc mật khẩu!");
       }
     } catch (err) {
       setError("Đã xảy ra lỗi. Vui lòng thử lại!");
-      console.error(err);
+      console.error('Login error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -67,12 +69,12 @@ export default function Login() {
               
               <FormField
                 control={form.control}
-                name="email"
+                name="username"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Email</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="email@example.com" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                      <Input placeholder="Nhập username" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>

@@ -10,10 +10,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useState } from "react";
 
 const registerSchema = z.object({
-  name: z.string().min(1, "Vui lòng nhập tên"),
+  username: z.string().min(3, "Username phải có ít nhất 3 ký tự"),
   email: z.string().min(1, "Vui lòng nhập email").email("Email không hợp lệ"),
   password: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
   confirmPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu"),
+  phone: z.string().optional(),
+  dob: z.string().optional(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Mật khẩu không khớp",
   path: ["confirmPassword"],
@@ -27,7 +29,14 @@ export default function Register() {
 
   const form = useForm({
     resolver: zodResolver(registerSchema),
-    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
+    defaultValues: { 
+      username: "", 
+      email: "", 
+      password: "", 
+      confirmPassword: "",
+      phone: "",
+      dob: ""
+    },
   });
 
   async function onSubmit(values) {
@@ -35,7 +44,13 @@ export default function Register() {
     setError("");
     
     try {
-      const result = await register(values.name, values.email, values.password);
+      const result = await register(
+        values.username, 
+        values.email, 
+        values.password,
+        values.phone,
+        values.dob
+      );
       
       if (result.success) {
         navigate("/");
@@ -73,12 +88,12 @@ export default function Register() {
               
               <FormField
                 control={form.control}
-                name="name"
+                name="username"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Tên đầy đủ</FormLabel>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Nhập tên của bạn" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                      <Input placeholder="Nhập username" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>
@@ -93,6 +108,34 @@ export default function Register() {
                     <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Email</FormLabel>
                     <FormControl>
                       <Input placeholder="m@example.com" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                    </FormControl>
+                    {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field, fieldState }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Số điện thoại (tùy chọn)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="0123456789" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
+                    </FormControl>
+                    {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="dob"
+                render={({ field, fieldState }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-gray-700 dark:text-gray-300">Ngày sinh (tùy chọn)</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} className="h-11 bg-slate-50 dark:bg-gray-800" />
                     </FormControl>
                     {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                   </FormItem>

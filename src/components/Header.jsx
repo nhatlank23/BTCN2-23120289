@@ -2,6 +2,7 @@ import Nav from './Nav';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, AvatarFallback } from './ui/avatar';
 
 const Header = () => {
     const { isDarkMode, toggleTheme } = useTheme();
@@ -12,7 +13,7 @@ const Header = () => {
         logout();
         navigate('/login');
     };
-
+    console.log('Header render, isAuthenticated:', isAuthenticated, 'user:', user);
     return (
         <header className="flex flex-col gap-2 w-full">
             {/* Dòng 1: Top Bar (Màu đỏ/nâu như đề bài) */}
@@ -52,9 +53,14 @@ const Header = () => {
                     <div className="flex items-center gap-2">
                         {isAuthenticated ? (
                             <>
-                                <span className="text-sm text-gray-700 dark:text-gray-300 hidden md:block">
-                                    {user?.name || user?.email}
-                                </span>
+                                <div className="flex items-center gap-3 bg-slate-100 dark:bg-slate-700 rounded-full pl-1 pr-4 py-1 border hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors cursor-pointer">
+                                    <Avatar className="w-8 h-8">
+                                        <AvatarFallback className="bg-gray-500 text-white text-xs font-bold flex items-center justify-center w-full h-full">
+                                            {user?.username ? user.username.slice(0, 2).toUpperCase() : "U"}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                    <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{user?.username}</span>
+                                </div>
                                 <button
                                     onClick={handleLogout}
                                     className="text-gray-700 dark:text-gray-200 px-3 py-1 rounded-md hover:bg-gray-600 hover:text-white dark:hover:bg-gray-600 font-medium border-2 border-gray-500 dark:border-gray-600 transition-colors text-sm"

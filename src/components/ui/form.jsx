@@ -5,7 +5,7 @@ const FormFieldContext = React.createContext({})
 const FormItemContext = React.createContext({})
 
 const Form = ({ children, ...props }) => {
-  return <form {...props}>{children}</form>
+  return <div {...props}>{children}</div>
 }
 
 const FormField = ({ control, name, render }) => {
