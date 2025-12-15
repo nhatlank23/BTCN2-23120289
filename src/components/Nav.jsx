@@ -9,6 +9,8 @@ const Nav = () => {
         e.preventDefault();
         if (searchQuery.trim()) {
             navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+        } else {
+            navigate('/');
         }
     };
 
