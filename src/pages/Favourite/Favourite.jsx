@@ -19,8 +19,15 @@ const Favourite = () => {
 
   // Fetch favourites on mount
   useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    
     fetchFavourites();
-  }, []);
+  }, [navigate]);
 
   const fetchFavourites = async () => {
     setLoading(true);
